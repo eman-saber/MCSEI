@@ -1,0 +1,6 @@
+.bg-primary{
+    background: linear-gradient(135deg, #446cb1, #ea3fb9) !important; 
+    clip-path: polygon(0% 0%, 100% 0%, 26.8% 100.3%, 0% 100%);
+    /* box-shadow: 0px 5px 15px rgba(0, 0, 0, 0.5)!important;
+    border: blue; */
+} 

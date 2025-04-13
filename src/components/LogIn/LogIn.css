@@ -1,0 +1,21 @@
+.bg-primary-lgn {
+    box-shadow: 0 0 25px #236ac0;
+    background: linear-gradient(135deg, #446cb1, #ec54c1) !important; 
+    clip-path: polygon(0% 0%, 100.1% 0%, 100.1% 100.3%, 68.2% 100.3%);
+   
+ 
+  }
+  .card-style{
+     box-shadow: 0 0 25px #236ac0;
+    
+  }
+  .text-white {
+    color: white ;
+  }
+  
+
+  .direction-L{
+    text-align: left;
+    display: block;
+  }
+ 
