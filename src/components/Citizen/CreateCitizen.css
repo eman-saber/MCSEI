@@ -1,0 +1,14 @@
+.out-form {
+    background: linear-gradient(135deg, #6697eb, #FBC2EB) !important;
+    min-height: 91vh;
+    width: 100vw; 
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 0;
+    margin: 0; 
+    position: absolute;
+    top: 60px;
+    left: 0;
+    
+}
