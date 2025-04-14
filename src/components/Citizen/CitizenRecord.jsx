@@ -20,13 +20,11 @@ function CitizenRecord() {
     try {
       const TOKEN = localStorage.getItem("userToken");
       console.log("TOKEN:", TOKEN);
-      
- 
+
       if (!searchId) {
         setError("Please enter a valid National ID.");
         return;
       }
-
 
       const response = await fetch(
         `https://medical-website-production-1dc4.up.railway.app/citizens/search?national_ID=${searchId}`, 
@@ -40,26 +38,18 @@ function CitizenRecord() {
       );
 
       if (!response.ok) {
-        // throw new Error("Citizen not found.");
         console.log(response);
         throw new Error(response?.message);
-
       }
 
       const result = await response.json();
       console.log("Fetched Data:", result);
-
-      if (!result || typeof result !== "object") {
-        throw new Error("Invalid data format: expected an object");
-      }
-
 
       const citizen = result.citizen; 
 
       if (!citizen || typeof citizen !== "object") {
         throw new Error("Invalid data format: citizen is not an object");
       }
-
 
       setCitizenData([citizen]); 
 
@@ -77,8 +67,8 @@ function CitizenRecord() {
       <SearchInput onSearch={handleSearch} loading={loading} />
       {error && <div className="alert alert-danger">{error}</div>}
 
-      <div className="col-md-8 mt-5 card-container">
-        <div className="card shadow-sm p-4 rounded-4 citizen_color" style={{ width: "150%" }}>
+      <div className="mt-5 card-container">
+        <div className="card shadow-sm p-4 rounded-4 citizen_color mx-auto w-100 w-lg-75 w-xl-50">
           <div className="d-flex align-items-center mb-3">
             <div className="bg-light p-3 rounded-circle">
               <FaUser className="fs-4 me-2" style={{ color: "blue" }} />
@@ -86,7 +76,10 @@ function CitizenRecord() {
             <h5 className="ms-3 fw-bold">Personal Details:</h5>
           </div>
 
-          {citizenData.length > 0 && <TableData data={citizenData} setData={setCitizenData} />}
+         
+          <div className="table-responsive">
+            {citizenData.length > 0 && <TableData data={citizenData} setData={setCitizenData} />}
+          </div>
         </div>
       </div>
 

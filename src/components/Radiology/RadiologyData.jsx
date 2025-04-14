@@ -41,9 +41,8 @@ function RadiologyData() {
       const result = await response.json();
       console.log("Fetched Data:", result);
 
-      // التأكد من وجود البيانات في المفتاح 'data' وتحويله إلى مصفوفة
       if (result && result.data) {
-        setRadiologyData([result.data]);  // تحويل الكائن إلى مصفوفة تحتوي على هذا الكائن
+        setRadiologyData(result.data); 
       } else {
         throw new Error("No radiology record found.");
       }
@@ -62,7 +61,7 @@ function RadiologyData() {
       {error && <div className="alert alert-danger">{error}</div>}
 
       <div className="col-md-8 mt-5 card-container">
-        <div className="card shadow-sm p-4 rounded-4 citizen_color" style={{ width: "150%" }}>
+        <div className="card shadow-sm p-4 rounded-4 citizen_color">
           <div className="d-flex align-items-center mb-3">
             <div className="bg-light p-3 rounded-circle">
               <FontAwesomeIcon icon={faXRay} size="2x" color="blue" />
@@ -70,7 +69,9 @@ function RadiologyData() {
             <h5 className="ms-3 fw-bold">Radiology Details:</h5>
           </div>
           {radiologyData.length > 0 && !error && (
-            <TableRadiologydata data={radiologyData} setData={setRadiologyData} />
+            <div className="table-responsive">
+              <TableRadiologydata data={radiologyData} setData={setRadiologyData} />
+            </div>
           )}
         </div>
       </div>

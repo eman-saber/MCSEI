@@ -229,12 +229,11 @@ function TableRadiologydata({ data, setData }) {
               />
             </div>
 
-            <button type="button" className="btn btn-success me-2" onClick={handleUpdate}>
-              Save Changes
-            </button>
-            <button type="button" className="btn btn-secondary" onClick={() => setEditingRecord(null)}>
-              Cancel
-            </button>
+            <div className="text-center mt-3">
+              <button type="button" className="btn btn-primary" onClick={handleUpdate}>
+                Update Record
+              </button>
+            </div>
           </form>
         </div>
       )}
