@@ -87,7 +87,7 @@ const RadiologyForm = ({ onSubmit }) => {
 
   return (
     <>
-    <div className="out-form">
+    <div className="out-form mt-0">
       <div className="container p-4 bg-light rounded shadow-lg " style={{ border: "1px solid blue", borderRadius: "10px" }}>
         <h2 className="text-center fw-bold text-primary">Add Radiology information</h2>
         <form className="row g-3" onSubmit={handleSubmit}>
