@@ -65,7 +65,7 @@ function MedicalRecord() {
       {error && <div className="alert alert-danger">{error}</div>}
 
       <div className="col-md-8 mt-5 card-container">
-        <div className="card shadow-sm p-4 rounded-4 citizen_color" style={{ width: "150%" }}>
+        <div className="card shadow-sm p-4 rounded-4 citizen_color">
           <div className="d-flex align-items-center mb-3">
             <div className="bg-light p-3 rounded-circle">
               <FontAwesomeIcon icon={faNotesMedical} size="2x" color="blue" />
@@ -73,17 +73,16 @@ function MedicalRecord() {
             <h5 className="ms-3 fw-bold">Medical Details:</h5>
           </div>
 
-         
-          {citizenData && (
+          {citizenData && citizenData.length > 0 && (
             <div className="mb-4">
-              <p><strong>Full Name:</strong> {citizenData.full_name}</p>
-              <p><strong>National ID:</strong> {citizenData.national_ID}</p>
+              <p><strong>Full Name:</strong> {citizenData[0].full_name}</p> 
             </div>
           )}
 
-         
           {medicalData.length > 0 && !error && (
-            <TableMedicaldata data={medicalData} setData={setMedicalData} />
+            <div className="table-responsive">
+              <TableMedicaldata data={medicalData} setData={setMedicalData} />
+            </div>
           )}
         </div>
       </div>

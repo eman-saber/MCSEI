@@ -60,7 +60,7 @@ const ConfirmEmail = () => {
     <Container fluid className="d-flex justify-content-center align-items-center" style={{ minHeight: "100vh" }}>
       <Row className="w-100 card-style" style={{ maxWidth: "900px", height: "600px", borderRadius: "15px", overflow: "hidden" }}>
         
-        {/* الجزء النصي الأيمن (أو العلوي في الموبايل) */}
+        
         <Col md={6} className="bg-primary-lgn text-white p-3 order-1 order-md-2 d-flex flex-column justify-content-start">
           <div className="text-center px-2 mt-4">
             <h2 className='mb-3'>Verify Your Email</h2>
@@ -72,7 +72,7 @@ const ConfirmEmail = () => {
           </div>
         </Col>
 
-        {/* الفورم */}
+       
         <Col md={6} className="p-4 d-flex flex-column justify-content-center order-2 order-md-1">
           <div className="text-center">
             <img src={ConfirmPic} alt="Confirm Email" height="80" />
