@@ -1,0 +1,27 @@
+{
+  "files": {
+    "main.css": "/MCSEI/static/css/main.1cce3d2d.css",
+    "main.js": "/MCSEI/static/js/main.3c402087.js",
+    "static/js/453.dfde46f9.chunk.js": "/MCSEI/static/js/453.dfde46f9.chunk.js",
+    "static/media/fa-solid-900.ttf": "/MCSEI/static/media/fa-solid-900.2582b0e4bcf85eceead0.ttf",
+    "static/media/fa-brands-400.ttf": "/MCSEI/static/media/fa-brands-400.1815e00441357e01619e.ttf",
+    "static/media/fa-solid-900.woff2": "/MCSEI/static/media/fa-solid-900.2463b90d9a316e4e5294.woff2",
+    "static/media/fa-brands-400.woff2": "/MCSEI/static/media/fa-brands-400.c210719e60948b211a12.woff2",
+    "static/media/fa-regular-400.ttf": "/MCSEI/static/media/fa-regular-400.914997e1bdfc990d0897.ttf",
+    "static/media/homePic.svg": "/MCSEI/static/media/homePic.35ebd7032dc038ef3e18603d071a337c.svg",
+    "static/media/fa-regular-400.woff2": "/MCSEI/static/media/fa-regular-400.89999bdf5d835c012025.woff2",
+    "static/media/fa-v4compatibility.ttf": "/MCSEI/static/media/fa-v4compatibility.da94ef451f4969af06e6.ttf",
+    "static/media/confirmEmailPic.jpeg": "/MCSEI/static/media/confirmEmailPic.fefacacfef640beb9db9.jpeg",
+    "static/media/logInpic.svg": "/MCSEI/static/media/logInpic.79872296556418253ca4b3289f856112.svg",
+    "static/media/signUpPic.svg": "/MCSEI/static/media/signUpPic.badf54c00f2f29b0c263828907df08bf.svg",
+    "static/media/fa-v4compatibility.woff2": "/MCSEI/static/media/fa-v4compatibility.ea8f94e1d22e0d35ccd4.woff2",
+    "index.html": "/MCSEI/index.html",
+    "main.1cce3d2d.css.map": "/MCSEI/static/css/main.1cce3d2d.css.map",
+    "main.3c402087.js.map": "/MCSEI/static/js/main.3c402087.js.map",
+    "453.dfde46f9.chunk.js.map": "/MCSEI/static/js/453.dfde46f9.chunk.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.1cce3d2d.css",
+    "static/js/main.3c402087.js"
+  ]
+}
