@@ -144,7 +144,7 @@ function TableRadiologydata({ data, setData }) {
                     <td>{row.national_ID}</td>
                     <td>{row.radiology_type}</td>
                     <td>{row.radiologistNotes}</td>
-                    <td>{row.radiology_date ? new Date(row.radiology_date).toISOString().split("T")[0] : "N/A"}</td>
+                    <td>{row.radiology_date ? new Date(row.radiology_date).toISOString().split("T")[0] : ""}</td>
                     <td>
                       {row.images && row.images.length > 0 ? (
                         <a href={row.images[0].secure_url} target="_blank" rel="noopener noreferrer">
