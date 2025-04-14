@@ -40,7 +40,10 @@ function CitizenRecord() {
       );
 
       if (!response.ok) {
-        throw new Error("Citizen not found.");
+        // throw new Error("Citizen not found.");
+        console.log(response);
+        throw new Error(response?.message);
+
       }
 
       const result = await response.json();

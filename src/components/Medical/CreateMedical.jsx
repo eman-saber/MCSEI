@@ -148,7 +148,7 @@ function CreateMedical() {
           {/* Buttons */}
           <div className="d-flex justify-content-end gap-3 mt-4">
             <button type="submit" className="btn btn-primary shadow-sm px-4">Add</button>
-            <Link to={'/'} className="btn btn-secondary shadow-sm px-4">Back</Link>
+            <Link to={'/dashboard'} className="btn btn-secondary shadow-sm px-4">Back</Link>
           </div>
         </form>
       </div>

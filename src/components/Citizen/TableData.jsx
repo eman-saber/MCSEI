@@ -5,7 +5,7 @@ function TableData({ data, setData }) {
   const [editingCitizen, setEditingCitizen] = useState(null);
   const [updatedData, setUpdatedData] = useState(null);
 
-  const columns = ["Name", "National ID", "Blood Type", "Address", "Birth Date"];
+  const columns = ["Name", "Gender","National ID", "Blood Type", "Address", "Birth Date"];
 
   
   const TOKEN = localStorage.getItem("userToken");
@@ -29,10 +29,13 @@ function TableData({ data, setData }) {
                 {data.map((citizen, index) => (
                   <tr key={index}>
                     <td>{citizen.full_name || ""}</td>
+                    <td>{citizen.gender||"" }</td>
                     <td>{citizen.national_ID || ""}</td>
                     <td>{citizen.blood_type || ""}</td>
                     <td>{Array.isArray(citizen.address) ? citizen.address.join(", ") : citizen.address || ""}</td>
                     <td>{citizen.birth_date ? citizen.birth_date.split("T")[0] : ""}</td>
+                    
+                    
                     <td>
                       {TOKEN && (
                         <>
@@ -108,6 +111,7 @@ function TableData({ data, setData }) {
     setUpdatedData({
       national_ID: citizen.national_ID || "",
       full_name: citizen.full_name || "",
+      gender:citizen.gender||"",
       address: Array.isArray(citizen.address) ? citizen.address.join(", ") : citizen.address || "",
       blood_type: citizen.blood_type || "",
       birth_date: citizen.birth_date ? citizen.birth_date.split("T")[0] : "",

@@ -4,8 +4,8 @@ import { Container, Row, Col, Form, Button } from "react-bootstrap";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faEnvelope, faKey } from "@fortawesome/free-solid-svg-icons";
 import Swal from "sweetalert2";
-import ConfirmPic from '../../images/confirmEmailPic.jpeg'; 
-import '../LogIn/LogIn.css'; 
+import ConfirmPic from '../../images/confirmEmailPic.jpeg';
+import '../LogIn/LogIn.css';
 
 const ConfirmEmail = () => {
   const [email, setEmail] = useState("");
@@ -16,24 +16,18 @@ const ConfirmEmail = () => {
     e.preventDefault();
 
     const payload = {
-      email: email,
+      email,
       code: confirmationCode,
     };
-
-    console.log("🔍 Sending confirmation with:", payload);
 
     try {
       const response = await fetch("https://medical-website-production-1dc4.up.railway.app/auth/confirm-email", {
         method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
+        headers: { "Content-Type": "application/json" },
         body: JSON.stringify(payload),
       });
 
       const data = await response.json();
-
-      console.log("📨 Server response:", data.message, data.details);
 
       if (!response.ok) {
         Swal.fire({
@@ -50,12 +44,9 @@ const ConfirmEmail = () => {
         title: "Email Confirmed",
         text: "✅ Your email has been confirmed successfully!",
         confirmButtonColor: "#3085d6"
-      }).then(() => {
-        navigate("/login");
-      });
+      }).then(() => navigate("/login"));
 
     } catch (error) {
-      console.error("❌ Error during confirmation:", error);
       Swal.fire({
         icon: "error",
         title: "An error occurred",
@@ -67,10 +58,24 @@ const ConfirmEmail = () => {
 
   return (
     <Container fluid className="d-flex justify-content-center align-items-center" style={{ minHeight: "100vh" }}>
-      <Row className="w-100 card-style" style={{ maxWidth: "900px", height:"600px", borderRadius: "15px", overflow: "hidden" }}>
-        <Col md={6} className="p-4 d-flex flex-column justify-content-center order-md-1">
+      <Row className="w-100 card-style" style={{ maxWidth: "900px", height: "600px", borderRadius: "15px", overflow: "hidden" }}>
+        
+        {/* الجزء النصي الأيمن (أو العلوي في الموبايل) */}
+        <Col md={6} className="bg-primary-lgn text-white p-3 order-1 order-md-2 d-flex flex-column justify-content-start">
+          <div className="text-center px-2 mt-4">
+            <h2 className='mb-3'>Verify Your Email</h2>
+            <p>
+              Please check your email inbox <br />
+              for the confirmation code<br />
+              and enter it to activate your account.
+            </p>
+          </div>
+        </Col>
+
+        {/* الفورم */}
+        <Col md={6} className="p-4 d-flex flex-column justify-content-center order-2 order-md-1">
           <div className="text-center">
-            <img src={ConfirmPic} alt="Confirm Email" height="100" />
+            <img src={ConfirmPic} alt="Confirm Email" height="80" />
             <h3 className="mt-3">Confirm Email</h3>
           </div>
 
@@ -111,17 +116,9 @@ const ConfirmEmail = () => {
           </Form>
         </Col>
 
-        <Col md={6} className="bg-primary-lgn text-white p-1 order-md-2">
-          <h2 className='mt-5 text-center'>Verify Your Email</h2>
-          <p className="text-center mt-1">
-            Please check your email inbox <br/>for the confirmation code
-            <br /> and enter it to activate your account.
-          </p>
-        </Col>
       </Row>
     </Container>
   );
 };
 
 export default ConfirmEmail;
-

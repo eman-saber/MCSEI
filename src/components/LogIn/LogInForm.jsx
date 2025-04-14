@@ -7,13 +7,12 @@ import { faLock, faEnvelope } from "@fortawesome/free-solid-svg-icons";
 function LogInForm() {
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
-    const [error, setError] = useState(""); 
+    const [error, setError] = useState("");
     const navigate = useNavigate();
 
     const handleLogIn = async (e) => {
         e.preventDefault();
 
-        
         try {
             const response = await fetch("https://medical-website-production-1dc4.up.railway.app/auth/login", {
                 method: "POST",
@@ -26,24 +25,14 @@ function LogInForm() {
                 }),
             });
 
-            const responseData = await response.json();  
-
-          
-            console.log("Full login response JSON:", responseData);
+            const responseData = await response.json();
 
             if (response.ok) {
-                
                 const TOKEN = responseData.data.token;
-
-                
-                console.log("Saved Token:", TOKEN);
-
-                
-                localStorage.setItem("userEmail", email);  
-                localStorage.setItem("userToken", TOKEN); 
-                navigate("/dashboard");  
+                localStorage.setItem("userEmail", email);
+                localStorage.setItem("userToken", TOKEN);
+                navigate("/dashboard");
             } else {
-               
                 setError(responseData.message || "Incorrect email or password. Please try again.");
             }
         } catch (err) {
@@ -54,7 +43,7 @@ function LogInForm() {
     return (
         <>
             <Form onSubmit={handleLogIn}>
-                {error && <div className="alert alert-danger">{error}</div>} 
+                {error && <div className="alert alert-danger">{error}</div>}
 
                 <Form.Group controlId="formEmail" className="direction-L">
                     <Form.Label>
@@ -85,7 +74,7 @@ function LogInForm() {
                 </Form.Group>
 
                 <div className="mt-3">
-                    <Button  className="w-100 " variant="primary" type="submit">
+                    <Button className="w-100" variant="primary" type="submit">
                         Login
                     </Button>
                 </div>
@@ -95,5 +84,3 @@ function LogInForm() {
 }
 
 export default LogInForm;
-
-
