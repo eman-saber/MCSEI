@@ -44,12 +44,12 @@ function MedicalRecord() {
       const result = await response.json();
       console.log("Fetched Data:", result);
 
-      if (!result.data || !result.data.result) {
+      if (!result.data || !result.data.medicalRecord) {
         throw new Error("Invalid data format: medical data is missing.");
       }
 
-      setMedicalData([result.data.result]);      
-      setCitizenData(result.data.citizen);       
+      setMedicalData(result.data.medicalRecord);   // ← هنا التعديل
+      setCitizenData(result.data.citizen);         // ← وده تمام
     } catch (error) {
       console.error("Error fetching data:", error);
       setError(error.message);
