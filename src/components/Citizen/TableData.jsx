@@ -53,7 +53,7 @@ function TableData({ data, setData }) {
         setData((prev) => prev.filter((c) => c.national_ID !== national_ID));
         Swal.fire("Deleted!", "✅ Citizen deleted successfully!", "success");
       } catch (error) {
-        Swal.fire("Error", `⚠️ ${error.message}`);
+        Swal.fire("Error", "⚠️not authorized!" );
       }
     }
   };

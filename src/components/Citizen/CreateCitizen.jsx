@@ -22,7 +22,7 @@ function CreateCitizen() {
         if (!TOKEN) {
             Swal.fire({
                 title: "Unauthorized",
-                text: "⚠️ You must be logged in to perform this action.",
+                text: "",
                 icon: "warning",
                 confirmButtonColor: "#d33",
             });
@@ -45,44 +45,49 @@ function CreateCitizen() {
                 // gender: gender, 
             }),
         })
-            .then((response) => response.json())
-            .then((result) => {
-                console.log("Response after creation:", result);
+        .then((response) => response.json())
+        .then((result) => {
+            console.log("Response after creation:", result);
 
-                const message = result.message?.toLowerCase() || "";
-
-                if (message.includes("success")) {
-                    Swal.fire({
-                        title: "Success!",
-                        text: result.message,
-                        icon: "success",
-                        confirmButtonColor: "#28a745",
-                    });
-                    setId("");
-                    setName("");
-                    setAddress("");
-                    setBlood("");
-                    setBirthdate("");
-                    setMobileNumber("");
-                    // setGender(""); 
-                } else {
-                    Swal.fire({
-                        title: "Error!",
-                        text: result.message || "⚠️ Failed to create citizen.",
-                        icon: "error",
-                        confirmButtonColor: "#d33",
-                    });
-                }
-            })
-            .catch((error) => {
-                console.error("Error:", error);
+            if (result.error && result.error.toLowerCase().includes("already exists")) {
                 Swal.fire({
                     title: "Error!",
-                    text: `⚠️ An error occurred: ${error.message}`,
+                    text: "⚠️ Citizen with this National ID already exists.",
                     icon: "error",
                     confirmButtonColor: "#d33",
                 });
+            } else if (result.message?.toLowerCase().includes("success")) {
+                Swal.fire({
+                    title: "Success!",
+                    text: result.message,
+                    icon: "success",
+                    confirmButtonColor: "#28a745",
+                });
+                setId("");
+                setName("");
+                setAddress("");
+                setBlood("");
+                setBirthdate("");
+                setMobileNumber("");
+                // setGender("");
+            } else {
+                Swal.fire({
+                    title: "Error!",
+                    text: result.message || "⚠️ Failed to create citizen.",
+                    icon: "error",
+                    confirmButtonColor: "#d33",
+                });
+            }
+        })
+        .catch((error) => {
+            console.error("Error:", error);
+            Swal.fire({
+                title: "Error!",
+                text: `⚠️ An error occurred: ${error.message}`,
+                icon: "error",
+                confirmButtonColor: "#d33",
             });
+        });
     };
 
     return (
@@ -124,13 +129,13 @@ function CreateCitizen() {
                         <label htmlFor="mobileNumber" className="form-label fw-semibold">Mobile Number</label>
                         <input type="tel" className="form-control" id="mobileNumber" required value={mobileNumber} onChange={(e) => setMobileNumber(e.target.value)} />
                     </div>
-                   
-                    {/* <div className="col-md-6">
+                    {/* <div className="">
                         <label htmlFor="gender" className="form-label fw-semibold">Gender</label>
-                        <select className="form-control" id="gender" value={gender} onChange={(e) => setGender(e.target.value)} required>
+                        <select className="form-select" id="gender" required value={gender} onChange={(e) => setGender(e.target.value)}>
                             <option value="">Select Gender</option>
                             <option value="Male">Male</option>
                             <option value="Female">Female</option>
+                            <option value="Other">Other</option>
                         </select>
                     </div> */}
                     <div className="d-flex justify-content-end gap-3 mt-4">
