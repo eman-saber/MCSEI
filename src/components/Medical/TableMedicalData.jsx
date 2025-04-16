@@ -32,7 +32,7 @@ function TableMedicaldata({ data, setData }) {
     recode_date: "Date",
   };
 
-  const handleDelete = async (national_ID) => {
+  const handleDelete = async (medical) => {
     if (!TOKEN) {
       Swal.fire("Error", "User is not authenticated", "error");
       return;
@@ -51,7 +51,7 @@ function TableMedicaldata({ data, setData }) {
     if (confirmDelete.isConfirmed) {
       try {
         const response = await fetch(
-          `https://medical-website-production-1dc4.up.railway.app/medical-record/delete-medical-record/${national_ID}`,
+          `https://medical-website-production-1dc4.up.railway.app/medical-record/delete-medical-record/${medical.national_ID}/${medical._id}`,
           {
             method: "DELETE",
             headers: {
@@ -66,7 +66,7 @@ function TableMedicaldata({ data, setData }) {
         }
 
         setData((prevData) =>
-          prevData.filter((medical) => medical.national_ID !== national_ID)
+          prevData.filter((m) => m._id !== medical._id)
         );
 
         Swal.fire("Deleted!", "✅ Medical record deleted successfully!", "success");
@@ -119,7 +119,7 @@ function TableMedicaldata({ data, setData }) {
       if (!confirmUpdate.isConfirmed) return;
 
       const response = await fetch(
-        `https://medical-website-production-1dc4.up.railway.app/medical-record/update-medical-record/${editingMedical.national_ID}`,
+        `https://medical-website-production-1dc4.up.railway.app/medical-record/update-medical-record/${editingMedical.national_ID}/${editingMedical._id}`,
         {
           method: "PATCH",
           headers: {
@@ -138,7 +138,7 @@ function TableMedicaldata({ data, setData }) {
 
       setData((prevData) =>
         prevData.map((medical) =>
-          medical.national_ID === editingMedical.national_ID
+          medical._id === editingMedical._id
             ? { ...medical, ...filteredData }
             : medical
         )
@@ -183,7 +183,7 @@ function TableMedicaldata({ data, setData }) {
                   </button>
                   <button
                     className="btn btn-danger btn-sm"
-                    onClick={() => handleDelete(row.national_ID)}
+                    onClick={() => handleDelete(row)}
                     disabled={!TOKEN}
                   >
                     Delete

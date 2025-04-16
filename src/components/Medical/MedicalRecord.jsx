@@ -8,7 +8,7 @@ import { Link } from "react-router-dom";
 
 function MedicalRecord() {
   const [medicalData, setMedicalData] = useState([]);
-  const [citizenData, setCitizenData] = useState(null); 
+  const [citizenData, setCitizenData] = useState(null);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState("");
 
@@ -48,8 +48,8 @@ function MedicalRecord() {
         throw new Error("Invalid data format: medical data is missing.");
       }
 
-      setMedicalData(result.data.medicalRecord);   // ← هنا التعديل
-      setCitizenData(result.data.citizen);         // ← وده تمام
+      setMedicalData(result.data.medicalRecord);
+      setCitizenData(result.data.citizen);
     } catch (error) {
       console.error("Error fetching data:", error);
       setError(error.message);
@@ -73,13 +73,13 @@ function MedicalRecord() {
             <h5 className="ms-3 fw-bold">Medical Details:</h5>
           </div>
 
-          {citizenData && citizenData.length > 0 && (
+          {citizenData && Array.isArray(citizenData) && citizenData.length > 0 && (
             <div className="mb-4">
-              <p><strong>Full Name:</strong> {citizenData[0].full_name}</p> 
+              <p><strong>Full Name:</strong> {citizenData[0].full_name}</p>
             </div>
           )}
 
-          {medicalData.length > 0 && !error && (
+          {Array.isArray(medicalData) && medicalData.length > 0 && !error && (
             <div className="table-responsive">
               <TableMedicaldata data={medicalData} setData={setMedicalData} />
             </div>

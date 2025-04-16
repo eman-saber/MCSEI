@@ -6,8 +6,8 @@ function TableRadiologydata({ data, setData }) {
   const [updatedData, setUpdatedData] = useState({});
   const TOKEN = localStorage.getItem("userToken");
 
-  const handleDelete = async (id) => {
-    if (!id) {
+  const handleDelete = async (national_ID, _id) => {
+    if (!national_ID || !_id) {
       Swal.fire("Error", "Cannot delete record because the ID is missing!", "error");
       return;
     }
@@ -30,7 +30,7 @@ function TableRadiologydata({ data, setData }) {
     if (confirmDelete.isConfirmed) {
       try {
         const response = await fetch(
-          `https://medical-website-production-1dc4.up.railway.app/radiology/delete-citizen/${id}`,
+          `https://medical-website-production-1dc4.up.railway.app/radiology/delete-radiology/${national_ID}/${_id}`,
           {
             method: "DELETE",
             headers: {
@@ -40,14 +40,14 @@ function TableRadiologydata({ data, setData }) {
         );
 
         if (!response.ok) {
-          throw new Error(`Failed to delete record. Response status: ${response.status}`);
+          throw new Error(`Failed to delete record. Status: ${response.status}`);
         }
 
-        setData((prevData) => prevData.filter((record) => record.national_ID !== id));
+        setData((prevData) => prevData.filter((record) => record._id !== _id));
 
         Swal.fire("Deleted!", "✅ Record deleted successfully!", "success");
       } catch (error) {
-        Swal.fire("Error", `An error occurred while deleting the record: ${error.message}`, "error");
+        Swal.fire("Error", `An error occurred: ${error.message}`, "error");
       }
     }
   };
@@ -58,9 +58,7 @@ function TableRadiologydata({ data, setData }) {
   };
 
   const handleUpdate = async () => {
-    if (!editingRecord) return;
-
-    if (!TOKEN) {
+    if (!editingRecord || !TOKEN) {
       Swal.fire("Unauthorized", "You are not authorized to update records!", "error");
       return;
     }
@@ -89,11 +87,11 @@ function TableRadiologydata({ data, setData }) {
         formData.append("radiologistNotes", allowedData.radiologistNotes);
 
         if (updatedData.images instanceof File) {
-          formData.append("file", updatedData.images); 
+          formData.append("file", updatedData.images);
         }
 
         const response = await fetch(
-          `https://medical-website-production-1dc4.up.railway.app/radiology/update-citizen/${editingRecord.national_ID}`,
+          `https://medical-website-production-1dc4.up.railway.app/radiology/update-radiology/${editingRecord.national_ID}/${editingRecord._id}`,
           {
             method: "PATCH",
             headers: {
@@ -105,19 +103,19 @@ function TableRadiologydata({ data, setData }) {
 
         if (!response.ok) {
           const errorText = await response.text();
-          throw new Error(`Failed to update record: ${errorText}`);
+          throw new Error(`Failed to update: ${errorText}`);
         }
 
         setData((prevData) =>
           prevData.map((record) =>
-            record.national_ID === editingRecord.national_ID ? { ...updatedData } : record
+            record._id === editingRecord._id ? { ...updatedData } : record
           )
         );
         setEditingRecord(null);
 
         Swal.fire("Updated!", "✅ Record updated successfully!", "success");
       } catch (error) {
-        Swal.fire("Error", `⚠️ An error occurred: ${error.message}`, "error");
+        Swal.fire("Error", `⚠️ ${error.message}`, "error");
       }
     }
   };
@@ -126,7 +124,7 @@ function TableRadiologydata({ data, setData }) {
     <div className="container mt-4">
       {data && data.length > 0 ? (
         <div className="row">
-          <div className="col-md-10 mx-auto">
+          <div className="col-md-10 mx-auto overflow-x-auto">
             <table className="table table-striped table-bordered table-hover text-center">
               <thead className="table-primary">
                 <tr>
@@ -139,15 +137,23 @@ function TableRadiologydata({ data, setData }) {
                 </tr>
               </thead>
               <tbody>
-                {data.map((row, index) => (
-                  <tr key={index}>
+                {data.map((row) => (
+                  <tr key={row._id}>
                     <td>{row.national_ID}</td>
                     <td>{row.radiology_type}</td>
                     <td>{row.radiologistNotes}</td>
-                    <td>{row.radiology_date ? new Date(row.radiology_date).toISOString().split("T")[0] : ""}</td>
+                    <td>
+                      {row.radiology_date
+                        ? new Date(row.radiology_date).toISOString().split("T")[0]
+                        : ""}
+                    </td>
                     <td>
                       {row.images && row.images.length > 0 ? (
-                        <a href={row.images[0].secure_url} target="_blank" rel="noopener noreferrer">
+                        <a
+                          href={row.images[0].secure_url}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                        >
                           View Image
                         </a>
                       ) : (
@@ -164,7 +170,7 @@ function TableRadiologydata({ data, setData }) {
                       </button>
                       <button
                         className="btn btn-danger btn-sm"
-                        onClick={() => handleDelete(row.national_ID)}
+                        onClick={() => handleDelete(row.national_ID, row._id)} // تم تعديلها هنا
                         disabled={!TOKEN}
                       >
                         Delete
@@ -186,7 +192,12 @@ function TableRadiologydata({ data, setData }) {
           <form className="p-4 border rounded shadow bg-white">
             <div className="mb-3">
               <label className="form-label">National ID</label>
-              <input type="text" className="form-control" value={updatedData.national_ID || ""} readOnly />
+              <input
+                type="text"
+                className="form-control"
+                value={updatedData.national_ID || ""}
+                readOnly
+              />
             </div>
 
             <div className="mb-3">
@@ -195,7 +206,9 @@ function TableRadiologydata({ data, setData }) {
                 type="text"
                 className="form-control"
                 value={updatedData.radiology_type || ""}
-                onChange={(e) => setUpdatedData({ ...updatedData, radiology_type: e.target.value })}
+                onChange={(e) =>
+                  setUpdatedData({ ...updatedData, radiology_type: e.target.value })
+                }
               />
             </div>
 
@@ -205,7 +218,9 @@ function TableRadiologydata({ data, setData }) {
                 type="text"
                 className="form-control"
                 value={updatedData.radiologistNotes || ""}
-                onChange={(e) => setUpdatedData({ ...updatedData, radiologistNotes: e.target.value })}
+                onChange={(e) =>
+                  setUpdatedData({ ...updatedData, radiologistNotes: e.target.value })
+                }
               />
             </div>
 
@@ -214,9 +229,10 @@ function TableRadiologydata({ data, setData }) {
               <input
                 type="date"
                 className="form-control"
-                value={updatedData.radiology_date ? new Date(updatedData.radiology_date).toISOString().split("T")[0] : ""}
-                onChange={(e) => setUpdatedData({ ...updatedData, radiology_date: e.target.value })}
-                disabled 
+                value={updatedData.radiology_date
+                  ? new Date(updatedData.radiology_date).toISOString().split("T")[0]
+                  : ""}
+                disabled
               />
             </div>
 
@@ -225,12 +241,18 @@ function TableRadiologydata({ data, setData }) {
               <input
                 type="file"
                 className="form-control"
-                onChange={(e) => setUpdatedData({ ...updatedData, images: e.target.files[0] })}
+                onChange={(e) =>
+                  setUpdatedData({ ...updatedData, images: e.target.files[0] })
+                }
               />
             </div>
 
             <div className="text-center mt-3">
-              <button type="button" className="btn btn-primary" onClick={handleUpdate}>
+              <button
+                type="button"
+                className="btn btn-primary"
+                onClick={handleUpdate}
+              >
                 Update Record
               </button>
             </div>

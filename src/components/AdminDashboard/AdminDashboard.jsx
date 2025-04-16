@@ -70,7 +70,7 @@ function AdminDashboard() {
 
           <div className="col-12">
             <label htmlFor="email" className="form-label fw-semibold">
-              User Email
+               Email
             </label>
             <input
               type="email"
