@@ -110,12 +110,18 @@ function Dashboard() {
               >
                 View All
               </button> */}
+              
             </div>
+            
           </div>
         </div>
 
       </div>
+      <footer className="dash-footer ">
+            <small>© 2025 MCSEI - All rights reserved</small>
+          </footer>
     </div>
+    
   );
 }
 
