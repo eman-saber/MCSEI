@@ -53,7 +53,7 @@ function TableData({ data, setData }) {
         setData((prev) => prev.filter((c) => c.national_ID !== national_ID));
         Swal.fire("Deleted!", "✅ Citizen deleted successfully!", "success");
       } catch (error) {
-        Swal.fire("Error", "⚠️not authorized!" );
+        Swal.fire("Error", `⚠️ ${error.message}`, "error");
       }
     }
   };
@@ -86,7 +86,7 @@ function TableData({ data, setData }) {
     if (confirmUpdate.isConfirmed) {
       try {
         const res = await fetch(
-          `https://medical-website-production-1dc4.up.railway.app/citizens/update-citizen/${editingCitizen._id}`,
+          `https://medical-website-production-1dc4.up.railway.app/citizens/update-citizen/${editingCitizen.national_ID}`,
           {
             method: "PATCH",
             headers: {

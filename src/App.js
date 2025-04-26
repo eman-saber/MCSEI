@@ -13,6 +13,7 @@ import MainLayout from './components/MainLayout';
 import ConfirmEmail from './components/ConfirmEmail/ConfirmEmail';
 import LogIn from './components/LogIn/LogIn';
 import AdminDashboard from './components/AdminDashboard/AdminDashboard';
+import WelcomePage from './components/WelcomePage/WelcomePage';
 
 const ProtectedRoute = ({ element }) => {
   const TOKEN = localStorage.getItem("userToken");
@@ -23,8 +24,8 @@ function App() {
   return (
     <div className="App">
       <Routes>
+      <Route path="/" element={<WelcomePage />} />
         <Route element={<AuthLayout />}>
-          <Route path="/" element={<SignUp />} />
           <Route path="/signup" element={<SignUp />} />
           <Route path="/confirm-email" element={<ConfirmEmail />} />
           <Route path="/login" element={<LogIn />} />
@@ -41,8 +42,8 @@ function App() {
           <Route path="/admindashboard" element={<ProtectedRoute element={<AdminDashboard />} />} />
         </Route>
 
-        {/* أي مسار مش معروف */}
-        <Route path="*" element={<Navigate to="/login" replace />} />
+       
+        <Route path="*" element={<Navigate to="/" replace />} />
       </Routes>
     </div>
   );

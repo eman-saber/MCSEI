@@ -1,14 +1,14 @@
 import React from "react";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faFileAlt, faSignOutAlt, faUserShield } from "@fortawesome/free-solid-svg-icons"; 
+import { faFileAlt, faSignOutAlt, faUserShield, faHome } from "@fortawesome/free-solid-svg-icons"; 
 import homePic from "../../images/homePic.svg";
 import './Navbar.css';
 
 function Navbar() {
   const location = useLocation();
   const navigate = useNavigate();
-  const isStyledPage = ["/addnewcitizen", "/createmedical", "/createradiology","/admindashboard"].includes(location.pathname);
+  const isStyledPage = ["/addnewcitizen", "/createmedical", "/createradiology", "/admindashboard"].includes(location.pathname);
 
   const handleLogout = () => {
     localStorage.removeItem("userToken");
@@ -38,12 +38,20 @@ function Navbar() {
 
         <div className="collapse navbar-collapse" id="navbarSupportedContent">
           <ul className="navbar-nav me-auto mb-2 mb-lg-0 d-flex justify-content-center w-100">  
+          {/* Home Link */}
+          <li className="nav-item mx-3">
+              <Link className="nav-link d-flex align-items-center" to="/">
+                <FontAwesomeIcon icon={faHome} className="me-2" style={{ color: "blue" }} />
+                Home
+              </Link>
+            </li>
             <li className="nav-item mx-3">
               <Link className="nav-link active d-flex align-items-center" to="/dashboard">
                 <FontAwesomeIcon icon={faFileAlt} className="me-2" style={{ color: "blue" }} />
                 Records
               </Link>
             </li>
+            
           </ul>
 
           {/* Admin Dashboard and Log Out Buttons */}
