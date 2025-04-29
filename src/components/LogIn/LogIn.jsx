@@ -16,6 +16,7 @@ function LogIn() {
                         </div>
                         <LogInForm />
                         <div className="mt-3 text-center">
+                        
                             <p>
                                 Don't have an account?{" "}
                                 <Link to='/signUp' className="text-decoration-none">
