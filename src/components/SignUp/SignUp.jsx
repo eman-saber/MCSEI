@@ -8,7 +8,7 @@ function SignUp() {
     return (
         <>
             <Container fluid className="d-flex justify-content-center align-items-center" style={{ minHeight: "100vh" }}>
-                <Row className="w-100 card-style" style={{ maxWidth: "900px", height: "600px", borderRadius: "15px", overflow: "hidden" }}>
+                <Row className="w-100 card-style" style={{ maxWidth: "900px", height: "650px", borderRadius: "15px", overflow: "hidden" }}>
 
                     <Col md={6} className="bg-primary-signup text-white p-3 order-1 order-md-1 d-flex flex-column justify-content-start">
                         <div className="text-center px-2 mt-4">
@@ -30,6 +30,12 @@ function SignUp() {
                                 Already have an account?{" "}
                                 <Link to='/login' className="text-decoration-none">
                                     Login
+                                </Link>
+                            </p>
+                            <p>
+                                Already registered?{" "}
+                                <Link to='/confirm-email' className="text-decoration-none">
+                                    Confirm Email
                                 </Link>
                             </p>
                         </div>

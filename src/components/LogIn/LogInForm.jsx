@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { Form, Button } from "react-bootstrap";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faLock, faEnvelope } from "@fortawesome/free-solid-svg-icons";
@@ -72,6 +72,11 @@ function LogInForm() {
                         required
                     />
                 </Form.Group>
+                <p>
+        <Link to='/forget-password' className="text-decoration-none">
+            Forget Password?
+        </Link>
+    </p>
 
                 <div className="mt-3">
                     <Button className="w-100" variant="primary" type="submit">

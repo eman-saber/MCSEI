@@ -14,6 +14,10 @@ import ConfirmEmail from './components/ConfirmEmail/ConfirmEmail';
 import LogIn from './components/LogIn/LogIn';
 import AdminDashboard from './components/AdminDashboard/AdminDashboard';
 import WelcomePage from './components/WelcomePage/WelcomePage';
+import ForgetPassword from './components/LogIn/ForgetPassword';
+import VerifyCode from './components/LogIn/VerifyCode';
+import ResetPassword from './components/LogIn/ResetPassword';
+import UpdatePassword from './components/Update Password/UpdatePssword';
 
 const ProtectedRoute = ({ element }) => {
   const TOKEN = localStorage.getItem("userToken");
@@ -29,6 +33,9 @@ function App() {
           <Route path="/signup" element={<SignUp />} />
           <Route path="/confirm-email" element={<ConfirmEmail />} />
           <Route path="/login" element={<LogIn />} />
+          <Route path="/forget-password" element={<ForgetPassword/>} />
+<Route path="/verify-code" element={<VerifyCode />} />
+<Route path="/reset-password" element={<ResetPassword />} />
         </Route>
 
         <Route element={<MainLayout />}>
@@ -40,6 +47,7 @@ function App() {
           <Route path="/createradiology" element={<ProtectedRoute element={<CreateRadiology />} />} />
           <Route path="/radiologyrecord" element={<ProtectedRoute element={<RadiologyData />} />} />
           <Route path="/admindashboard" element={<ProtectedRoute element={<AdminDashboard />} />} />
+          <Route path="/updatepassword" element={<UpdatePassword/>} />
         </Route>
 
        
