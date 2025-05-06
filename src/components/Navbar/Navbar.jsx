@@ -1,14 +1,14 @@
 import React from "react";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faFileAlt, faSignOutAlt, faUserShield, faHome, faKey } from "@fortawesome/free-solid-svg-icons";
+import { faFileAlt, faSignOutAlt, faUserShield, faHome, faKey, faCog } from "@fortawesome/free-solid-svg-icons";
 import homePic from "../../images/homePic.svg";
 import './Navbar.css';
 
 function Navbar() {
   const location = useLocation();
   const navigate = useNavigate();
-  const isStyledPage = ["/addnewcitizen", "/createmedical", "/createradiology", "/admindashboard","/updatepassword"].includes(location.pathname);
+  const isStyledPage = ["/addnewcitizen", "/createmedical", "/createradiology", "/admindashboard", "/updatepassword"].includes(location.pathname);
 
   const handleLogout = () => {
     localStorage.removeItem("userToken");
@@ -38,64 +38,53 @@ function Navbar() {
 
         <div className="collapse navbar-collapse" id="navbarSupportedContent">
           <ul className="navbar-nav me-auto mb-2 mb-lg-0 d-flex justify-content-center w-100">
-            {/* Home Link */}
             <li className="nav-item mx-3">
               <Link className="nav-link d-flex align-items-center" to="/">
                 <FontAwesomeIcon icon={faHome} className="me-2" style={{ color: "blue" }} />
                 Home
               </Link>
             </li>
-
-            {/* Records Link */}
             <li className="nav-item mx-3">
               <Link className="nav-link active d-flex align-items-center" to="/dashboard">
                 <FontAwesomeIcon icon={faFileAlt} className="me-2" style={{ color: "blue" }} />
-                Records
+                Dashboard
               </Link>
             </li>
           </ul>
 
-          {/* Admin Dashboard and Other Buttons */}
-          <div className="ms-auto d-flex flex-column align-items-end gap-2">
-            {/* Admin Dashboard Button */}
-            <Link to="/admindashboard"
-              className="btn btn-sm btn-outline-secondary d-flex align-items-center px-2 py-1"
-              style={{ fontSize: "0.85rem", whiteSpace: "nowrap" }}
-            >
-              <FontAwesomeIcon
-                icon={faUserShield}
-                className="me-1"
-                style={{ fontSize: "1rem", color: "black" }}
-              />
-              Admin Dashboard
-            </Link>
-
-            {/* Update Password Button */}
-            <Link to="/updatepassword"
-              className="btn btn-sm btn-outline-warning d-flex align-items-center px-2 py-1"
-              style={{ fontSize: "0.85rem", whiteSpace: "nowrap" }}
-            >
-              <FontAwesomeIcon
-                icon={faKey}
-                className="me-1"
-                style={{ fontSize: "1rem", color: "orange" }}
-              />
-              Update Password
-            </Link>
-
-            {/* Log Out Button */}
+          {/* Settings Dropdown */}
+          <div className="dropdown ms-auto">
             <button
-              className="btn btn-sm btn-outline-primary d-flex align-items-center px-2 py-1"
-              onClick={handleLogout}
-              style={{ fontSize: "0.85rem", whiteSpace: "nowrap" }}
+              className="btn btn-sm btn-outline-secondary dropdown-toggle d-flex align-items-center"
+              type="button"
+              id="settingsDropdown"
+              data-bs-toggle="dropdown"
+              aria-expanded="false"
+              style={{ fontSize: "0.85rem" }}
             >
-              <FontAwesomeIcon
-                icon={faSignOutAlt}
-                className="me-1"
-                style={{ fontSize: "1rem", color: "blue" }}
-              />
-              Log Out
+              <FontAwesomeIcon icon={faCog} className="me-2" />
+              Settings
             </button>
+            <ul className="dropdown-menu dropdown-menu-end" aria-labelledby="settingsDropdown">
+              <li>
+                <Link className="dropdown-item d-flex align-items-center" to="/admindashboard">
+                  <FontAwesomeIcon icon={faUserShield} className="me-2" style={{ color: "black" }} />
+                  Admin Dashboard
+                </Link>
+              </li>
+              <li>
+                <Link className="dropdown-item d-flex align-items-center" to="/updatepassword">
+                  <FontAwesomeIcon icon={faKey} className="me-2" style={{ color: "orange" }} />
+                  Update Password
+                </Link>
+              </li>
+              <li>
+                <button className="dropdown-item d-flex align-items-center" onClick={handleLogout}>
+                  <FontAwesomeIcon icon={faSignOutAlt} className="me-2" style={{ color: "blue" }} />
+                  Log Out
+                </button>
+              </li>
+            </ul>
           </div>
         </div>
       </div>
