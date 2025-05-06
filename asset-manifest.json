@@ -1,7 +1,7 @@
 {
   "files": {
-    "main.css": "/MCSEI/static/css/main.fa96cb5d.css",
-    "main.js": "/MCSEI/static/js/main.f06ff251.js",
+    "main.css": "/MCSEI/static/css/main.f5373628.css",
+    "main.js": "/MCSEI/static/js/main.9c5b30a2.js",
     "static/js/453.dfde46f9.chunk.js": "/MCSEI/static/js/453.dfde46f9.chunk.js",
     "static/media/fa-solid-900.ttf": "/MCSEI/static/media/fa-solid-900.2582b0e4bcf85eceead0.ttf",
     "static/media/fa-brands-400.ttf": "/MCSEI/static/media/fa-brands-400.1815e00441357e01619e.ttf",
@@ -16,12 +16,12 @@
     "static/media/signUpPic.svg": "/MCSEI/static/media/signUpPic.badf54c00f2f29b0c263828907df08bf.svg",
     "static/media/fa-v4compatibility.woff2": "/MCSEI/static/media/fa-v4compatibility.ea8f94e1d22e0d35ccd4.woff2",
     "index.html": "/MCSEI/index.html",
-    "main.fa96cb5d.css.map": "/MCSEI/static/css/main.fa96cb5d.css.map",
-    "main.f06ff251.js.map": "/MCSEI/static/js/main.f06ff251.js.map",
+    "main.f5373628.css.map": "/MCSEI/static/css/main.f5373628.css.map",
+    "main.9c5b30a2.js.map": "/MCSEI/static/js/main.9c5b30a2.js.map",
     "453.dfde46f9.chunk.js.map": "/MCSEI/static/js/453.dfde46f9.chunk.js.map"
   },
   "entrypoints": [
-    "static/css/main.fa96cb5d.css",
-    "static/js/main.f06ff251.js"
+    "static/css/main.f5373628.css",
+    "static/js/main.9c5b30a2.js"
   ]
 }
