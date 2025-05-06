@@ -6,3 +6,27 @@
     background: linear-gradient(135deg, #6697eb, #FBC2EB) !important;
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); 
 }
+
+.dropdown-menu {
+    min-width: 200px;
+    font-size: 0.9rem;
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.3);
+  }
+  
+  .dropdown-item {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 8px 16px;
+    transition: background-color 0.2s ease;
+  }
+  
+  .dropdown-item:hover {
+    background-color: #f0f0f0;
+  }
+
+  .dropdown-menu-end {
+    border: 1px solid blue;
+    border-radius: 8px;
+  }
+  

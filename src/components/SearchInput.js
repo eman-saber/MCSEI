@@ -6,7 +6,7 @@ function SearchInput({ onSearch, loading }) {
   const handleSubmit = (e) => {
     e.preventDefault();
     if (searchId.trim()) {
-      onSearch(searchId);
+      onSearch(searchId); 
     }
   };
 

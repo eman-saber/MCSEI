@@ -5,12 +5,13 @@ import "./CitizenRecord.css";
 import SearchInput from "../SearchInput";
 import TableData from "./TableData";
 import './CreateCitizen.css';
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 function CitizenRecord() {
   const [citizenData, setCitizenData] = useState([]);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState("");
+  const navigate = useNavigate(); 
 
   const handleSearch = async (searchId) => {
     setCitizenData([]);
@@ -51,7 +52,9 @@ function CitizenRecord() {
         throw new Error("Invalid data format: citizen is not an object");
       }
 
-      setCitizenData([citizen]); 
+      setCitizenData([citizen]);
+
+      navigate(`/citizenrecord/${searchId}`);
 
     } catch (error) {
       console.error("Error fetching data:", error);
@@ -76,7 +79,6 @@ function CitizenRecord() {
             <h5 className="ms-3 fw-bold">Personal Details:</h5>
           </div>
 
-         
           <div className="table-responsive">
             {citizenData.length > 0 && <TableData data={citizenData} setData={setCitizenData} />}
           </div>

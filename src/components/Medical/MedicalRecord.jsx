@@ -1,16 +1,16 @@
 import React, { useState } from "react";
-import '../Dashboard/Dashboard.css';
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faNotesMedical } from "@fortawesome/free-solid-svg-icons";
 import SearchInput from "../SearchInput";
 import TableMedicaldata from "./TableMedicalData";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 function MedicalRecord() {
   const [medicalData, setMedicalData] = useState([]);
   const [citizenData, setCitizenData] = useState(null);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState("");
+  const navigate = useNavigate();
 
   const handleSearch = async (searchId) => {
     if (!searchId) {
@@ -50,6 +50,8 @@ function MedicalRecord() {
 
       setMedicalData(result.data.medicalRecord);
       setCitizenData(result.data.citizen);
+      // بعد الحصول على البيانات، يتم توجيه المستخدم إلى صفحة تفاصيل المواطن
+      navigate(`/medicalrecord/${searchId}`);
     } catch (error) {
       console.error("Error fetching data:", error);
       setError(error.message);
