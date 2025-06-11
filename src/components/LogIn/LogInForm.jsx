@@ -14,7 +14,7 @@ function LogInForm() {
         e.preventDefault();
 
         try {
-            const response = await fetch("https://medical-website-production-1dc4.up.railway.app/auth/login", {
+            const response = await fetch("https://medical-website-mocha.vercel.app/auth/login", {
                 method: "POST",
                 headers: {
                     "Content-Type": "application/json",

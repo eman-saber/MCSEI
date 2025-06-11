@@ -27,7 +27,7 @@ function MedicalRecord() {
       const TOKEN = localStorage.getItem("userToken");
 
       const response = await fetch(
-        `https://medical-website-production-1dc4.up.railway.app/medical-record/${searchId}`,
+        `https://medical-website-mocha.vercel.app/medical-record/${searchId}`,
         {
           method: "GET",
           headers: {

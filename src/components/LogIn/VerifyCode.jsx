@@ -14,7 +14,7 @@ function VerifyCode() {
         e.preventDefault();
 
         try {
-            const response = await axios.patch('https://medical-website-production-1dc4.up.railway.app/auth/valid-forget-password', {
+            const response = await axios.patch('https://medical-website-mocha.vercel.app/auth/valid-forget-password', {
                 email,
                 code,
             });

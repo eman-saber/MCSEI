@@ -48,7 +48,7 @@ const CreateRadiology = () => {
 
     try {
       const response = await fetch(
-        "https://medical-website-production-1dc4.up.railway.app/radiology/create-radiology",
+        "https://medical-website-mocha.vercel.app/radiology/create-radiology",
         {
           method: "POST",
           headers: {

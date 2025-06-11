@@ -29,7 +29,7 @@ function CreateCitizen() {
             return;
         }
 
-        fetch("https://medical-website-production-1dc4.up.railway.app/citizens/create-citizen", {
+        fetch("https://medical-website-mocha.vercel.app/citizens/create-citizen", {
             method: "POST",
             headers: {
                 "Content-Type": "application/json",

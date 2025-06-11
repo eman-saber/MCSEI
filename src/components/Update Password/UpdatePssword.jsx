@@ -13,7 +13,7 @@ function UpdatePassword() {
     try {
       const token = localStorage.getItem("userToken");
       const response = await axios.patch(
-        "https://medical-website-production-1dc4.up.railway.app/auth/update-password",
+        "https://medical-website-mocha.vercel.app/auth/update-password",
         {
           oldPassword,
           password,

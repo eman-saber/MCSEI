@@ -10,7 +10,7 @@ function ForgetPassword() {
     const handleSubmit = async (e) => {
         e.preventDefault();
         try {
-            const response = await axios.patch('https://medical-website-production-1dc4.up.railway.app/auth/forget-password', { email });
+            const response = await axios.patch('https://medical-website-mocha.vercel.app/auth/forget-password', { email });
             console.log(response.data);
             setMessage("Check your email for the code.");
             navigate("/verify-code", { state: { email } });  

@@ -24,7 +24,7 @@ function CreateMedical() {
       return;
     }
 
-    fetch("https://medical-website-production-1dc4.up.railway.app/medical-record/create-medical-record", {
+    fetch("https://medical-website-mocha.vercel.app/medical-record/create-medical-record", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
