@@ -20,7 +20,7 @@ function ResetPassword() {
         }
 
         try {
-            const response = await axios.patch('https://medical-website-production-1dc4.up.railway.app/auth/reset-password', {
+            const response = await axios.patch('https://medical-website-mocha.vercel.app/auth/reset-password', {
                 email,
                 code,
                 password,

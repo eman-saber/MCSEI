@@ -10,7 +10,7 @@ function SignUpForm() {
 
     const handleSignUp = async (values) => {
         try {
-            const response = await fetch("https://medical-website-production-1dc4.up.railway.app/auth/signup", {
+            const response = await fetch("https://medical-website-mocha.vercel.app/auth/signup", {
                 method: "POST",
                 headers: {
                     "Content-Type": "application/json",

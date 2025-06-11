@@ -29,7 +29,7 @@ function AdminDashboard() {
       const TOKEN = localStorage.getItem("userToken");
 
       const response = await axios.patch(
-        "https://medical-website-production-1dc4.up.railway.app/user/dashboard/role",
+        "https://medical-website-mocha.vercel.app/user/dashboard/role",
         { email, role },
         {
           headers: {
