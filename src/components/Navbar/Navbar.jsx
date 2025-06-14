@@ -23,7 +23,6 @@ function Navbar() {
           <img src={homePic} alt="Logo" className="logo me-2" style={{ width: "50px", height: "auto", maxHeight: "40px" }} />
           MCSEI
         </Link>
-
         <button
           className="navbar-toggler"
           type="button"
@@ -35,7 +34,6 @@ function Navbar() {
         >
           <span className="navbar-toggler-icon"></span>
         </button>
-
         <div className="collapse navbar-collapse" id="navbarSupportedContent">
           <ul className="navbar-nav me-auto mb-2 mb-lg-0 d-flex justify-content-center w-100">
             <li className="nav-item mx-3">
@@ -51,7 +49,6 @@ function Navbar() {
               </Link>
             </li>
           </ul>
-
           {/* Settings Dropdown */}
           <div className="dropdown ms-auto">
             <button
@@ -60,8 +57,7 @@ function Navbar() {
               id="settingsDropdown"
               data-bs-toggle="dropdown"
               aria-expanded="false"
-              style={{ fontSize: "0.85rem" }}
-            >
+              style={{ fontSize: "0.85rem" }}>
               <FontAwesomeIcon icon={faCog} className="me-2" />
               Settings
             </button>
@@ -91,5 +87,4 @@ function Navbar() {
     </nav>
   );
 }
-
 export default Navbar;

@@ -16,23 +16,19 @@ function LogIn() {
                         </div>
                         <LogInForm />
                         <div className="mt-3 text-center">
-                        
-                            <p>
-                                Don't have an account?{" "}
+                            <p>Don't have an account?{" "}
                                 <Link to='/signUp' className="text-decoration-none">
                                     Sign Up
                                 </Link>
                             </p>
                         </div>
                     </Col>
-
                     <Col md={6} className="bg-primary-lgn text-white p-3 order-1 order-md-2 d-flex flex-column justify-content-start">
-    <div className="text-center px-2">
-        <h2 className='mb-3'>WELCOME BACK !</h2>
-        <p>Let's check in on your medical information.</p>
-    </div>
-</Col>
-
+                        <div className="text-center px-2">
+                            <h2 className='mb-3'>WELCOME BACK!</h2>
+                            <p>Let's check in on your medical information.</p>
+                        </div>
+                    </Col>
                 </Row>
             </Container>
         </>

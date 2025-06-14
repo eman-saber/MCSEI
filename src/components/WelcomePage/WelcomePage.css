@@ -8,7 +8,6 @@
       transform: translateY(0);
     }
   }
-  
   @keyframes fadeInTitle {
     from {
       opacity: 0;
@@ -19,7 +18,6 @@
       transform: translateY(0);
     }
   }
-  
   @keyframes fadeInButtons {
     from {
       opacity: 0;
@@ -30,7 +28,6 @@
       transform: translateX(0);
     }
   }
-  
   @keyframes fadeInDivider {
     from {
       opacity: 0;
@@ -41,7 +38,6 @@
       transform: translateX(0);
     }
   }
-  
   .homecolor {
     background: linear-gradient(135deg, #1c4997, #c938a0) !important;
     height: 100vh;
@@ -49,34 +45,27 @@
     justify-content: center;
     align-items: center;
   }
-  
   .welcome-image {
     animation: fadeInImage 1s ease-out;
   }
-  
   .welcome-title {
     animation: fadeInTitle 1.5s ease-out;
   }
-  
   .welcome-description {
     animation: fadeInTitle 1.8s ease-out;
   }
-  
   .feature-list {
     animation: fadeInTitle 2s ease-out;
   }
-  
   .welcome-login-button,
   .welcome-signup-button {
-    font-size: 0.9rem; /* تقليص حجم النص */
-    padding: 0.5rem 2rem; /* تقليص الحجم العام */
+    font-size: 0.9rem; 
+    padding: 0.5rem 2rem; 
     animation: fadeInButtons 2.2s ease-out;
   }
-  
   .learn-more-button {
     animation: fadeInButtons 2.5s ease-out;
   }
-  
   .divider {
     height: 100px;
     width: 1px;
@@ -84,7 +73,6 @@
     margin: 0 20px;
     animation: fadeInDivider 2.4s ease-out; 
   }
-  
   .welcome-footer {
     position: absolute;
     bottom: 20px;
@@ -95,37 +83,31 @@
     font-size: 0.875rem;
     animation: fadeInTitle 2.8s ease-out;
   }
-  
   .welcome-footer {
     font-size: 14px;
     color: #343a40;
   }
-  
   .welcome-login-button {
     background-color: transparent;
     border: 2px solid beige; 
     color: beige;
     transition: all 0.3s ease;
   }
-  
   .welcome-login-button:hover {
     background-color: beige;
     color: #1c4997;
   }
-  
   .welcome-signup-button {
     background-color: #1c4997;
     border: 2px solid #1c4997;
     color: beige;
     transition: all 0.3s ease;
   }
-  
   .welcome-signup-button:hover {
     background-color: beige;
     color: #c938a0;
     border: 2px solid #c938a0;
   }
-  
   .text-light {
     color: #fff;
     margin-bottom: 8px;

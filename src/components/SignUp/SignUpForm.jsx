@@ -7,7 +7,6 @@ import Swal from "sweetalert2";
 
 function SignUpForm() {
     const navigate = useNavigate();
-
     const handleSignUp = async (values) => {
         try {
             const response = await fetch("https://medical-website-mocha.vercel.app/auth/signup", {
@@ -23,9 +22,7 @@ function SignUpForm() {
                     confirmationPassword: values.confirmationPassword,
                 }),
             });
-
             const responseData = await response.json();
-
             if (response.ok) {
                 Swal.fire({
                     icon: 'success',
@@ -164,5 +161,4 @@ function SignUpForm() {
         </Formik>
     );
 }
-
 export default SignUpForm;
