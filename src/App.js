@@ -18,7 +18,6 @@ import ForgetPassword from './components/LogIn/ForgetPassword';
 import VerifyCode from './components/LogIn/VerifyCode';
 import ResetPassword from './components/LogIn/ResetPassword';
 import UpdatePassword from './components/Update Password/UpdatePssword';
-// import RadiologyImageViewer from './components/Radiology/RadiologyImageViewer';
 
 const ProtectedRoute = ({ element }) => {
   const TOKEN = localStorage.getItem("userToken");
@@ -51,7 +50,6 @@ function App() {
           <Route path="/createradiology" element={<ProtectedRoute element={<CreateRadiology />} />} />
           <Route path="/radiologyrecord" element={<ProtectedRoute element={<RadiologyData />} />} />
           <Route path="/radiologyrecord/:nationalId" element={<ProtectedRoute element={<RadiologyData />} />} />
-          {/* <Route path="/view-image" element={<ProtectedRoute element={<RadiologyImageViewer />}/>} /> */}
           <Route path="/admindashboard" element={<ProtectedRoute element={<AdminDashboard />} />} />
           <Route path="/updatepassword" element={<UpdatePassword/>} />
         </Route>

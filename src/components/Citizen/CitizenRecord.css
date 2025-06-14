@@ -4,13 +4,9 @@
     padding: 20px;
     border-radius: 20px; 
   }
-  
-
 .card-container .card {
     width: 150%; 
   }
-  
-
   @media (max-width: 991px) {
     .card-container .card {
       width: 100% !important;

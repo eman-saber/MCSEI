@@ -11,10 +11,8 @@ const ConfirmEmail = () => {
   const [email, setEmail] = useState("");
   const [confirmationCode, setConfirmationCode] = useState("");
   const navigate = useNavigate();
-
   const handleConfirm = async (e) => {
     e.preventDefault();
-
     const payload = {
       email,
       code: confirmationCode,
@@ -38,7 +36,6 @@ const ConfirmEmail = () => {
         });
         return;
       }
-
       Swal.fire({
         icon: "success",
         title: "Email Confirmed",

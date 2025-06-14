@@ -12,7 +12,6 @@ function CitizenRecord() {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState("");
   const navigate = useNavigate(); 
-
   const handleSearch = async (searchId) => {
     setCitizenData([]);
     setError("");
@@ -20,13 +19,12 @@ function CitizenRecord() {
 
     try {
       const TOKEN = localStorage.getItem("userToken");
-      console.log("TOKEN:", TOKEN);
+      // console.log("TOKEN:", TOKEN);
 
       if (!searchId) {
         setError("Please enter a valid National ID.");
         return;
       }
-
       const response = await fetch(
         `https://medical-website-mocha.vercel.app/citizens/search?national_ID=${searchId}`, 
         {
@@ -37,23 +35,17 @@ function CitizenRecord() {
           }
         }
       );
-
       if (!response.ok) {
-        console.log(response);
+        // console.log(response);
         throw new Error(response?.message);
       }
-
       const result = await response.json();
-      console.log("Fetched Data:", result);
-
+      // console.log("Fetched Data:", result);
       const citizen = result.citizen; 
-
       if (!citizen || typeof citizen !== "object") {
         throw new Error("Invalid data format: citizen is not an object");
       }
-
       setCitizenData([citizen]);
-
       navigate(`/citizenrecord/${searchId}`);
 
     } catch (error) {

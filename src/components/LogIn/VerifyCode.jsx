@@ -7,29 +7,22 @@ function VerifyCode() {
     const [message, setMessage] = useState("");
     const navigate = useNavigate();
     const location = useLocation();
-
     const email = location.state?.email;
-
     const handleSubmit = async (e) => {
         e.preventDefault();
-
         try {
             const response = await axios.patch('https://medical-website-mocha.vercel.app/auth/valid-forget-password', {
                 email,
                 code,
             });
-
             console.log(response.data);
             setMessage("Code verified successfully!");
-
             navigate("/reset-password", { state: { email, code } });
-
         } catch (error) {
             console.error(error.response?.data || error.message);
             setMessage(error.response?.data?.message || "Verification failed. Try again.");
         }
     };
-
     return (
         <div className="d-flex justify-content-center align-items-center forget-colr" style={{ minHeight: "100vh" }}>
             <form onSubmit={handleSubmit} className="p-4 border rounded shadow text-bg-light" style={{ width: "400px" }}>
@@ -41,8 +34,7 @@ function VerifyCode() {
                         placeholder="Enter verification code"
                         value={code}
                         onChange={(e) => setCode(e.target.value)}
-                        required
-                    />
+                        required />
                 </div>
                 <button type="submit" className="btn btn-primary w-100">Verify</button>
                 {message && <p className="mt-3 text-center">{message}</p>}
@@ -50,5 +42,4 @@ function VerifyCode() {
         </div>
     );
 }
-
 export default VerifyCode;

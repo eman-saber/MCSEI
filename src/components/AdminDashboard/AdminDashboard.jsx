@@ -7,24 +7,8 @@ function AdminDashboard() {
   const navigate = useNavigate();
   const [email, setEmail] = useState("");
   const [role, setRole] = useState("User");
-
-  // Admin and SuperAdmin Check
-
-  // useEffect(() => {
-  //   const role = localStorage.getItem("userRole");
-  //   if (role !== "Admin" && role !== "SuperAdmin") {
-  //     Swal.fire({
-  //       icon: "error",
-  //       title: "Permission Denied",
-  //       text: "You don’t have permission to access this page.",
-  //     });
-  //     navigate("/dashboard"); 
-  //   }
-  // }, [navigate]);
-
   const handleSubmit = async (e) => {
     e.preventDefault();
-
     try {
       const TOKEN = localStorage.getItem("userToken");
 
@@ -37,7 +21,6 @@ function AdminDashboard() {
           },
         }
       );
-
       Swal.fire({
         icon: "success",
         title: "✅ Role Updated",
@@ -50,7 +33,6 @@ function AdminDashboard() {
           navigate("/dashboard");
         }
       });
-
       setEmail("");
       setRole("User");
     } catch (error) {
@@ -67,11 +49,8 @@ function AdminDashboard() {
       <div className="container mt-0 p-4 bg-light rounded shadow">
         <h2 className="text-center text-primary mb-4 fw-bold">Change User Role</h2>
         <form onSubmit={handleSubmit} className="row g-3">
-
           <div className="col-12">
-            <label htmlFor="email" className="form-label fw-semibold">
-               Email
-            </label>
+            <label htmlFor="email" className="form-label fw-semibold"> Email </label>
             <input
               type="email"
               id="email"
@@ -79,46 +58,32 @@ function AdminDashboard() {
               placeholder="Enter user email"
               value={email}
               onChange={(e) => setEmail(e.target.value)}
-              required
-            />
+              required/>
           </div>
-
           <div className="col-12">
-            <label htmlFor="role" className="form-label fw-semibold">
-              Select Role
-            </label>
+            <label htmlFor="role" className="form-label fw-semibold"> Select Role </label>
             <select
               id="role"
               className="form-select"
               value={role}
               onChange={(e) => setRole(e.target.value)}
-              required
-            >
+              required>
               <option value="User">User</option>
               <option value="Doctor">Doctor</option>
               <option value="Admin">Admin</option>
-              
             </select>
           </div>
-
           <div className="d-flex justify-content-end">
-            <button type="submit" className="btn btn-primary px-4">
-              Update Role
-            </button>
+            <button type="submit" className="btn btn-primary px-4">  Update Role </button>
           </div>
         </form>
-
         <div className="d-flex justify-content-end gap-3 mt-4">
           <button
             className="btn btn-secondary shadow-sm px-4"
-            onClick={() => navigate("/dashboard")}
-          >
-            Back
-          </button>
+            onClick={() => navigate("/dashboard")}> Back </button>
         </div>
       </div>
     </div>
   );
 }
-
 export default AdminDashboard;

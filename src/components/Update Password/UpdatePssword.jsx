@@ -9,7 +9,6 @@ function UpdatePassword() {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-
     try {
       const token = localStorage.getItem("userToken");
       const response = await axios.patch(
@@ -25,7 +24,6 @@ function UpdatePassword() {
           },
         }
       );
-
       console.log(response.data);
       Swal.fire({
         icon: "success",
@@ -40,14 +38,12 @@ function UpdatePassword() {
       alert("Error updating password. Check console.");
     }
   };
-
   return (
     <div className="out-form">
       <div className="container my-5 d-flex justify-content-center ">
         <div
           className="card shadow p-4"
-          style={{ maxWidth: "500px", width: "100%" }}
-        >
+          style={{ maxWidth: "500px", width: "100%" }}>
           <h2 className="mb-4 text-center">Update Password</h2>
           <form onSubmit={handleSubmit}>
             <div className="mb-3">
@@ -57,10 +53,8 @@ function UpdatePassword() {
                 className="form-control"
                 value={oldPassword}
                 onChange={(e) => setOldPassword(e.target.value)}
-                required
-              />
+                required/>
             </div>
-
             <div className="mb-3">
               <label className="form-label">New Password</label>
               <input
@@ -68,10 +62,8 @@ function UpdatePassword() {
                 className="form-control"
                 value={password}
                 onChange={(e) => setPassword(e.target.value)}
-                required
-              />
+                required/>
             </div>
-
             <div className="mb-3">
               <label className="form-label">Confirm New Password</label>
               <input
@@ -79,18 +71,13 @@ function UpdatePassword() {
                 className="form-control"
                 value={confirmationPassword}
                 onChange={(e) => setConfirmationPassword(e.target.value)}
-                required
-              />
+                required/>
             </div>
-
-            <button type="submit" className="btn btn-primary w-100">
-              Update Password
-            </button>
+            <button type="submit" className="btn btn-primary w-100"> Update Password</button>
           </form>
         </div>
       </div>
     </div>
   );
 }
-
 export default UpdatePassword;
