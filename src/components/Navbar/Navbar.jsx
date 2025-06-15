@@ -13,7 +13,7 @@ function Navbar() {
   const handleLogout = () => {
     localStorage.removeItem("userToken");
     localStorage.removeItem("userEmail");
-    navigate("/");
+    navigate("/MCSEI");
   };
 
   return (

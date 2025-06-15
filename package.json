@@ -28,7 +28,7 @@
     "sweetalert2": "^11.22.0",
     "web-vitals": "^2.1.4"
   },
-  "homepage": "https://eman-saber.github.io/MCSEI",
+  "homepage": "https://github.com/eman-saber/MCSEI.git",
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",
