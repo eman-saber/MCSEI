@@ -138,17 +138,13 @@ function TableData({ data, setData }) {
                       <button
                         className="btn btn-warning btn-sm me-2"
                         onClick={() => handleEditClick(citizen)}
-                        disabled={!TOKEN}
-                      >
+                        disabled={!TOKEN} >
                         Update
                       </button>
                       <button
                         className="btn btn-danger btn-sm"
                         onClick={() => handleDelete(citizen.national_ID)}
-                        disabled={!TOKEN}
-                      >
-                        Delete
-                      </button>
+                        disabled={!TOKEN}> Delete  </button>
                     </td>
                   </tr>
                 ))}

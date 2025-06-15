@@ -11,7 +11,6 @@ function CreateCitizen() {
     const [blood, setBlood] = useState("");
     const [birthdate, setBirthdate] = useState("");
     const [mobileNumber, setMobileNumber] = useState("");
-    // const [gender, setGender] = useState(""); 
 
     const formSubmit = (e) => {
         e.preventDefault();
@@ -42,13 +41,11 @@ function CreateCitizen() {
                 blood_type: blood,
                 birth_date: new Date(birthdate).toISOString().split("T")[0],
                 mobileNumber: mobileNumber,
-                // gender: gender, 
             }),
         })
         .then((response) => response.json())
         .then((result) => {
             console.log("Response after creation:", result);
-
             if (result.error && result.error.toLowerCase().includes("already exists")) {
                 Swal.fire({
                     title: "Error!",
@@ -69,7 +66,6 @@ function CreateCitizen() {
                 setBlood("");
                 setBirthdate("");
                 setMobileNumber("");
-                // setGender("");
             } else {
                 Swal.fire({
                     title: "Error!",
@@ -103,18 +99,14 @@ function CreateCitizen() {
                         <label htmlFor="fullName" className="form-label fw-semibold">Full Name</label>
                         <div className="input-group">
                             <input type="text" className="form-control" id="fullName" required value={name} onChange={(e) => setName(e.target.value)} />
-                            <span className="input-group-text bg-white">
-                                <FaUser className="text-primary" />
-                            </span>
+                            <span className="input-group-text bg-white"> <FaUser className="text-primary" /></span>
                         </div>
                     </div>
                     <div className="">
                         <label htmlFor="dateOfBirth" className="form-label fw-semibold">Birthdate</label>
                         <div className="input-group">
                             <input type="date" className="form-control" id="dateOfBirth" required value={birthdate} onChange={(e) => setBirthdate(e.target.value)} />
-                            <span className="input-group-text bg-white">
-                                <FaCalendarAlt className="text-primary" />
-                            </span>
+                            <span className="input-group-text bg-white"> <FaCalendarAlt className="text-primary" /> </span>
                         </div>
                     </div>
                     <div className="">
@@ -129,15 +121,6 @@ function CreateCitizen() {
                         <label htmlFor="mobileNumber" className="form-label fw-semibold">Mobile Number</label>
                         <input type="tel" className="form-control" id="mobileNumber" required value={mobileNumber} onChange={(e) => setMobileNumber(e.target.value)} />
                     </div>
-                    {/* <div className="">
-                        <label htmlFor="gender" className="form-label fw-semibold">Gender</label>
-                        <select className="form-select" id="gender" required value={gender} onChange={(e) => setGender(e.target.value)}>
-                            <option value="">Select Gender</option>
-                            <option value="Male">Male</option>
-                            <option value="Female">Female</option>
-                            <option value="Other">Other</option>
-                        </select>
-                    </div> */}
                     <div className="d-flex justify-content-end gap-3 mt-4">
                         <button type="submit" className="btn btn-primary shadow-sm px-4">Add</button>
                         <Link to={'/dashboard'} className="btn btn-secondary shadow-sm px-4">Back</Link>
@@ -146,6 +129,4 @@ function CreateCitizen() {
             </div>
         </div>
     );
-}
-
-export default CreateCitizen;
+} export default CreateCitizen;

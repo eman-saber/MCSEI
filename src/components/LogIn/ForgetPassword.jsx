@@ -11,7 +11,7 @@ function ForgetPassword() {
     e.preventDefault();
     try {
       const response = await axios.patch(
-        "https://medical-website-mocha.vercel.app/auth/forget-password",
+        "https://medical-website-five-xi.vercel.app/auth/forget-password",
         { email }
       );
       console.log(response.data);

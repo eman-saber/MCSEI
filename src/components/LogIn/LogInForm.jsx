@@ -13,7 +13,7 @@ function LogInForm() {
   const handleLogIn = async (e) => {
     e.preventDefault();
     try {
-      const response = await fetch("https://medical-website-mocha.vercel.app/auth/login", {
+      const response = await fetch("https://medical-website-five-xi.vercel.app/auth/login", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ email, password }),
