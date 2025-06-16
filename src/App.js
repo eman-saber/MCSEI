@@ -28,7 +28,7 @@ function App() {
   return (
     <div className="App">
       <Routes>
-      <Route path="/MCSEI" element={<WelcomePage />} />
+      <Route path="/" element={<WelcomePage />} />
         <Route element={<AuthLayout />}>
           <Route path="/signup" element={<SignUp />} />
           <Route path="/confirm-email" element={<ConfirmEmail />} />

@@ -37,7 +37,7 @@ function Navbar() {
         <div className="collapse navbar-collapse" id="navbarSupportedContent">
           <ul className="navbar-nav me-auto mb-2 mb-lg-0 d-flex justify-content-center w-100">
             <li className="nav-item mx-3">
-              <Link className="nav-link d-flex align-items-center" to="/MCSEI">
+              <Link className="nav-link d-flex align-items-center" to="/">
                 <FontAwesomeIcon icon={faHome} className="me-2" style={{ color: "blue" }} />
                 Home
               </Link>

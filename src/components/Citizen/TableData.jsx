@@ -6,7 +6,7 @@ function TableData({ data, setData }) {
   const [updatedData, setUpdatedData] = useState(null);
   const TOKEN = localStorage.getItem("userToken");
 
-  const columns = ["Name", "National ID", "Blood Type", "Address", "Birth Date"];
+  const columns = ["Name", "National ID", "Blood Type", "Address", "Birth Date", "Mobile Number"];
 
   const handleEditClick = (citizen) => {
     setEditingCitizen(citizen);
@@ -16,6 +16,7 @@ function TableData({ data, setData }) {
       address: citizen.address || "",
       blood_type: citizen.blood_type || "",
       birth_date: citizen.birth_date ? citizen.birth_date.split("T")[0] : "",
+      mobileNumber: citizen.mobileNumber || "",
     });
   };
 
@@ -38,7 +39,7 @@ function TableData({ data, setData }) {
     if (confirmDelete.isConfirmed) {
       try {
         const res = await fetch(
-          `https://medical-website-mocha.vercel.app/citizens/delete-citizen/${national_ID}`,
+          `https://medical-website-five-xi.vercel.app/citizens/delete-citizen/${national_ID}`,
           {
             method: "DELETE",
             headers: {
@@ -48,7 +49,14 @@ function TableData({ data, setData }) {
           }
         );
 
-        if (!res.ok) throw new Error(await res.text());
+        if (!res.ok) {
+          const errorResponse = await res.json().catch(() => ({}));
+          const userMessage =
+            errorResponse?.message === "not authorized!"
+              ? "You are not authorized to delete citizen."
+              : errorResponse?.message || "An unexpected error occurred.";
+          throw new Error(userMessage);
+        }
 
         setData((prev) => prev.filter((c) => c.national_ID !== national_ID));
         Swal.fire("Deleted!", "✅ Citizen deleted successfully!", "success");
@@ -86,7 +94,7 @@ function TableData({ data, setData }) {
     if (confirmUpdate.isConfirmed) {
       try {
         const res = await fetch(
-          `https://medical-website-mocha.vercel.app/citizens/update-citizen/${editingCitizen.national_ID}`,
+          `https://medical-website-five-xi.vercel.app/citizens/update-citizen/${editingCitizen.national_ID}`,
           {
             method: "PATCH",
             headers: {
@@ -97,7 +105,14 @@ function TableData({ data, setData }) {
           }
         );
 
-        if (!res.ok) throw new Error(await res.text());
+        if (!res.ok) {
+          const errorResponse = await res.json().catch(() => ({}));
+          const userMessage =
+            errorResponse?.message === "not authorized!"
+              ? "You are not authorized to update this data."
+              : errorResponse?.message || "An unexpected error occurred.";
+          throw new Error(userMessage);
+        }
 
         setData((prev) =>
           prev.map((citizen) =>
@@ -116,7 +131,7 @@ function TableData({ data, setData }) {
     <div className="container mt-4">
       {data && data.length > 0 ? (
         <div className="row justify-content-center">
-          <div className="col-md-8">
+          <div className="col-md-10">
             <table className="table table-striped table-bordered text-center">
               <thead className="table-primary">
                 <tr>
@@ -134,17 +149,22 @@ function TableData({ data, setData }) {
                     <td>{citizen.blood_type}</td>
                     <td>{Array.isArray(citizen.address) ? citizen.address.join(", ") : citizen.address}</td>
                     <td>{citizen.birth_date?.split("T")[0]}</td>
+                    <td>{citizen.mobileNumber}</td>
                     <td>
                       <button
                         className="btn btn-warning btn-sm me-2"
                         onClick={() => handleEditClick(citizen)}
-                        disabled={!TOKEN} >
+                        disabled={!TOKEN}
+                      >
                         Update
                       </button>
                       <button
                         className="btn btn-danger btn-sm"
                         onClick={() => handleDelete(citizen.national_ID)}
-                        disabled={!TOKEN}> Delete  </button>
+                        disabled={!TOKEN}
+                      >
+                        Delete
+                      </button>
                     </td>
                   </tr>
                 ))}

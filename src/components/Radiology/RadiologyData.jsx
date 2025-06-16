@@ -10,6 +10,7 @@ function RadiologyData() {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState("");
   const navigate = useNavigate();
+
   const handleSearch = async (searchId) => {
     if (!searchId) {
       setError("Please enter a National ID.");
@@ -24,7 +25,7 @@ function RadiologyData() {
       const token = localStorage.getItem("userToken");
 
       const response = await fetch(
-        `https://medical-website-mocha.vercel.app/radiology/${searchId}`,
+        `https://medical-website-five-xi.vercel.app/radiology/${searchId}`,
         {
           method: "GET",
           headers: {
@@ -43,8 +44,13 @@ function RadiologyData() {
       const result = await response.json();
       console.log("Fetched Data:", result);
 
-      if (result && result.data && result.data.length > 0) {
-        setRadiologyData(result.data);
+      if (
+        result &&
+        result.data &&
+        Array.isArray(result.data.radiology) &&
+        result.data.radiology.length > 0
+      ) {
+        setRadiologyData(result.data.radiology);
         navigate(`/radiologyrecord/${searchId}`);
       } else {
         throw new Error("No radiology records found.");
@@ -86,7 +92,10 @@ function RadiologyData() {
       </div>
 
       <div className="text-end mt-3">
-        <Link to={"/dashboard"} className="btn btn-secondary btn-lg shadow-sm px-4">
+        <Link
+          to={"/dashboard"}
+          className="btn btn-secondary btn-lg shadow-sm px-4"
+        >
           Back
         </Link>
       </div>

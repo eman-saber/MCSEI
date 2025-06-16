@@ -27,7 +27,7 @@ function MedicalRecord() {
       const TOKEN = localStorage.getItem("userToken");
 
       const response = await fetch(
-        `https://medical-website-mocha.vercel.app/medical-record/${searchId}`,
+        `https://medical-website-five-xi.vercel.app/medical-record/${searchId}`,
         {
           method: "GET",
           headers: {

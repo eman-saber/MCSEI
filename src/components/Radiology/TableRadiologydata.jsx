@@ -125,7 +125,7 @@ function TableRadiologydata({ data, setData }) {
     if (confirm.isConfirmed) {
       try {
         const res = await fetch(
-          `https://medical-website-mocha.vercel.app/radiology/delete-radiology/${national_ID}/${_id}`,
+          `https://medical-website-five-xi.vercel.app/radiology/delete-radiology/${national_ID}/${_id}`,
           {
             method: "DELETE",
             headers: { Authorization: `Bearer ${TOKEN}` },
@@ -186,7 +186,7 @@ function TableRadiologydata({ data, setData }) {
         }
 
         const res = await fetch(
-          `https://medical-website-mocha.vercel.app/radiology/update-radiology/${editingRecord.national_ID}/${editingRecord._id}`,
+          `https://medical-website-five-xi.vercel.app/radiology/update-radiology/${editingRecord.national_ID}/${editingRecord._id}`,
           {
             method: "PATCH",
             headers: { Authorization: `Bearer ${TOKEN}` },

@@ -26,7 +26,7 @@ function CitizenRecord() {
         return;
       }
       const response = await fetch(
-        `https://medical-website-mocha.vercel.app/citizens/search?national_ID=${searchId}`, 
+        `https://medical-website-five-xi.vercel.app/citizens/search?national_ID=${searchId}`, 
         {
           method: "GET",
           headers: {
