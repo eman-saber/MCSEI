@@ -20,7 +20,7 @@ function ResetPassword() {
         }
 
         try {
-            const response = await axios.patch('https://medical-website-five-xi.vercel.app/auth/reset-password', {
+            const response = await axios.patch('https://medical-website-three-delta.vercel.app/auth/reset-password', {
                 email,
                 code,
                 password,

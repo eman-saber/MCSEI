@@ -9,7 +9,7 @@ function SignUpForm() {
     const navigate = useNavigate();
     const handleSignUp = async (values) => {
         try {
-            const response = await fetch("https://medical-website-five-xi.vercel.app/auth/signup", {
+            const response = await fetch("https://medical-website-three-delta.vercel.app/auth/signup", {
                 method: "POST",
                 headers: {
                     "Content-Type": "application/json",

@@ -28,7 +28,7 @@ function CreateCitizen() {
             return;
         }
 
-        fetch("https://medical-website-five-xi.vercel.app/citizens/create-citizen", {
+        fetch("https://medical-website-three-delta.vercel.app/citizens/create-citizen", {
             method: "POST",
             headers: {
                 "Content-Type": "application/json",

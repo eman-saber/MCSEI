@@ -39,7 +39,7 @@ function TableData({ data, setData }) {
     if (confirmDelete.isConfirmed) {
       try {
         const res = await fetch(
-          `https://medical-website-five-xi.vercel.app/citizens/delete-citizen/${national_ID}`,
+          `https://medical-website-three-delta.vercel.app/citizens/delete-citizen/${national_ID}`,
           {
             method: "DELETE",
             headers: {
@@ -94,7 +94,7 @@ function TableData({ data, setData }) {
     if (confirmUpdate.isConfirmed) {
       try {
         const res = await fetch(
-          `https://medical-website-five-xi.vercel.app/citizens/update-citizen/${editingCitizen.national_ID}`,
+          `https://medical-website-three-delta.vercel.app/citizens/update-citizen/${editingCitizen.national_ID}`,
           {
             method: "PATCH",
             headers: {

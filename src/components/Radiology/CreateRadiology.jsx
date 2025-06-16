@@ -48,7 +48,7 @@ const CreateRadiology = () => {
 
     try {
       const response = await fetch(
-        "https://medical-website-five-xi.vercel.app/radiology/create-radiology",
+        "https://medical-website-three-delta.vercel.app/radiology/create-radiology",
         {
           method: "POST",
           headers: {

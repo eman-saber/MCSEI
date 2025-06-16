@@ -24,7 +24,7 @@ function CreateMedical() {
       return;
     }
 
-    fetch("https://medical-website-five-xi.vercel.app/medical-record/create-medical-record", {
+    fetch("https://medical-website-three-delta.vercel.app/medical-record/create-medical-record", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",

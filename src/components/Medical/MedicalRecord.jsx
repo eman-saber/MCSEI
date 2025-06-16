@@ -27,7 +27,7 @@ function MedicalRecord() {
       const TOKEN = localStorage.getItem("userToken");
 
       const response = await fetch(
-        `https://medical-website-five-xi.vercel.app/medical-record/${searchId}`,
+        `https://medical-website-three-delta.vercel.app/medical-record/${searchId}`,
         {
           method: "GET",
           headers: {
@@ -50,7 +50,6 @@ function MedicalRecord() {
 
       setMedicalData(result.data.medicalRecord);
       setCitizenData(result.data.citizen);
-      // بعد الحصول على البيانات، يتم توجيه المستخدم إلى صفحة تفاصيل المواطن
       navigate(`/medicalrecord/${searchId}`);
     } catch (error) {
       console.error("Error fetching data:", error);

@@ -51,7 +51,7 @@ function TableMedicaldata({ data, setData }) {
     if (confirmDelete.isConfirmed) {
       try {
         const response = await fetch(
-          `https://medical-website-five-xi.vercel.app/medical-record/delete-medical-record/${medical.national_ID}/${medical._id}`,
+          `https://medical-website-three-delta.vercel.app/medical-record/delete-medical-record/${medical.national_ID}/${medical._id}`,
           {
             method: "DELETE",
             headers: {
@@ -119,7 +119,7 @@ function TableMedicaldata({ data, setData }) {
       if (!confirmUpdate.isConfirmed) return;
 
       const response = await fetch(
-        `https://medical-website-five-xi.vercel.app/medical-record/update-medical-record/${editingMedical.national_ID}/${editingMedical._id}`,
+        `https://medical-website-three-delta.vercel.app/medical-record/update-medical-record/${editingMedical.national_ID}/${editingMedical._id}`,
         {
           method: "PATCH",
           headers: {
