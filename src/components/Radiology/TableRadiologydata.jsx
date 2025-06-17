@@ -88,7 +88,6 @@ function TableRadiologydata({ data, setData }) {
       if (e.key === "ArrowRight") navigateImage("next");
       if (e.key === "ArrowLeft") navigateImage("prev");
     };
-
     window.addEventListener("keydown", handleKeyDown);
     return () => window.removeEventListener("keydown", handleKeyDown);
   });
@@ -107,7 +106,6 @@ function TableRadiologydata({ data, setData }) {
       window.URL.revokeObjectURL(downloadUrl);
     } catch (error) {
       Swal.fire("Error", "Failed to download the image", "error");
-      console.error("Download error:", error);
     }
   };
 
@@ -177,12 +175,8 @@ function TableRadiologydata({ data, setData }) {
         formData.append("radiology_type", validData.radiology_type);
         formData.append("radiologistNotes", validData.radiologistNotes || "");
 
-        if (Array.isArray(images)) {
-          images.forEach((file) => {
-            if (file instanceof File) {
-              formData.append("file", file);
-            }
-          });
+        if (Array.isArray(images) && images[0] instanceof File) {
+          formData.append("images", images[0]);
         }
 
         const res = await fetch(
@@ -196,15 +190,15 @@ function TableRadiologydata({ data, setData }) {
 
         if (!res.ok) throw new Error(await res.text());
 
-        const updatedImages = [
-          ...(editingRecord.images || []),
-          ...(images?.filter((img) => img instanceof File).map((f) => ({ secure_url: URL.createObjectURL(f) })) || []),
-        ];
+        const newImage =
+          images?.[0] instanceof File
+            ? [{ secure_url: URL.createObjectURL(images[0]) }]
+            : editingRecord.images;
 
         setData((prevData) =>
           prevData.map((record) =>
             record._id === editingRecord._id
-              ? { ...record, ...validData, images: updatedImages }
+              ? { ...record, ...validData, images: newImage }
               : record
           )
         );
@@ -342,17 +336,16 @@ function TableRadiologydata({ data, setData }) {
               />
             </div>
             <div className="mb-3">
-              <label>Upload New Images</label>
+              <label>Upload New Image</label>
               <input
                 type="file"
                 className="form-control"
                 accept=".dcm,image/*"
-                multiple
                 onChange={(e) => {
-                  const newFiles = Array.from(e.target.files);
+                  const file = e.target.files[0];
                   setUpdatedData((prev) => ({
                     ...prev,
-                    images: [...(prev.images || []), ...newFiles],
+                    images: file ? [file] : [],
                   }));
                 }}
               />
@@ -372,8 +365,7 @@ function TableRadiologydata({ data, setData }) {
       <div
         id="dicomImage"
         style={{ width: "100%", height: "500px", textAlign: "center", marginTop: "20px" }}
-      >
-      </div>
+      ></div>
     </div>
   );
 }
