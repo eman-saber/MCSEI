@@ -11,9 +11,7 @@ function TableMedicaldata({ data, setData }) {
     clinic_code: "",
     recode_date: "",
   });
-
   const TOKEN = localStorage.getItem("userToken");
-
   const columns = [
     "national_ID",
     "diagnosis",
@@ -22,7 +20,6 @@ function TableMedicaldata({ data, setData }) {
     "clinic_code",
     "recode_date",
   ];
-
   const columnNames = {
     national_ID: "National ID",
     diagnosis: "Diagnosis",
@@ -31,13 +28,11 @@ function TableMedicaldata({ data, setData }) {
     clinic_code: "Clinic Code",
     recode_date: "Date",
   };
-
   const handleDelete = async (medical) => {
     if (!TOKEN) {
       Swal.fire("Error", "User is not authenticated", "error");
       return;
     }
-
     const confirmDelete = await Swal.fire({
       title: "Are you sure?",
       text: "Do you want to delete this medical record?",
@@ -47,11 +42,10 @@ function TableMedicaldata({ data, setData }) {
       cancelButtonColor: "#3085d6",
       confirmButtonText: "Yes, delete it!",
     });
-
     if (confirmDelete.isConfirmed) {
       try {
         const response = await fetch(
-          `https://medical-website-three-delta.vercel.app/medical-record/delete-medical-record/${medical.national_ID}/${medical._id}`,
+          `https://mcsei-production.up.railway.app/medical-record/delete-medical-record/${medical.national_ID}/${medical._id}`,
           {
             method: "DELETE",
             headers: {
@@ -60,52 +54,41 @@ function TableMedicaldata({ data, setData }) {
             },
           }
         );
-
         if (!response.ok) {
           throw new Error("Failed to delete medical data.");
         }
-
         setData((prevData) =>
           prevData.filter((m) => m._id !== medical._id)
         );
-
         Swal.fire("Deleted!", "✅ Medical record deleted successfully!", "success");
       } catch (error) {
         Swal.fire("Error", error.message, "error");
       }
     }
   };
-
   const handleEditClick = (medical) => {
     setEditingMedical(medical);
     setUpdatedData({ ...medical });
   };
-
   const handleUpdate = async () => {
     if (!editingMedical || !TOKEN) {
       Swal.fire("Error", "User is not authenticated or no record selected", "error");
       return;
     }
-
     try {
       let filteredData = { ...updatedData };
-
       filteredData.diagnosis = updatedData.diagnosis;
       filteredData.treatment = updatedData.treatment;
-
       if (filteredData.clinic_name.length < 3) {
         Swal.fire("Error", "Clinic name must be at least 3 characters long!", "error");
         return;
       }
-
       filteredData.clinic_code = String(filteredData.clinic_code);
-
       delete filteredData._id;
       delete filteredData.recode_date;
       delete filteredData.modified_on;
       delete filteredData.__v;
       delete filteredData.status;
-
       const confirmUpdate = await Swal.fire({
         title: "Are you sure?",
         text: "Do you want to save the changes?",
@@ -115,11 +98,9 @@ function TableMedicaldata({ data, setData }) {
         cancelButtonColor: "#d33",
         confirmButtonText: "Yes, update it!",
       });
-
       if (!confirmUpdate.isConfirmed) return;
-
       const response = await fetch(
-        `https://medical-website-three-delta.vercel.app/medical-record/update-medical-record/${editingMedical.national_ID}/${editingMedical._id}`,
+        `https://mcsei-production.up.railway.app/medical-record/update-medical-record/${editingMedical.national_ID}/${editingMedical._id}`,
         {
           method: "PATCH",
           headers: {
@@ -129,13 +110,10 @@ function TableMedicaldata({ data, setData }) {
           body: JSON.stringify(filteredData),
         }
       );
-
       const result = await response.json();
-
       if (!response.ok) {
         throw new Error(result.message || "Failed to update medical record.");
       }
-
       setData((prevData) =>
         prevData.map((medical) =>
           medical._id === editingMedical._id
@@ -143,14 +121,12 @@ function TableMedicaldata({ data, setData }) {
             : medical
         )
       );
-
       setEditingMedical(null);
       Swal.fire("Updated!", "✅ Medical record updated successfully!", "success");
     } catch (error) {
       Swal.fire("Error", `⚠️ An error occurred: ${error.message}`, "error");
     }
   };
-
   return (
     <div className="container mt-4">
       <table className="table table-striped table-bordered table-hover text-center">
@@ -200,7 +176,6 @@ function TableMedicaldata({ data, setData }) {
           )}
         </tbody>
       </table>
-
       {editingMedical && (
         <div className="container mt-4">
           <h3 className="text-center">Update Medical Record</h3>
@@ -220,23 +195,20 @@ function TableMedicaldata({ data, setData }) {
                   onChange={(e) =>
                     setUpdatedData({ ...updatedData, [key]: e.target.value })
                   }
-                  disabled={key === "national_ID"}
-                />
+                  disabled={key === "national_ID"} />
               </div>
             ))}
             <div className="text-center mt-3">
               <button
                 type="button"
                 className="btn btn-success me-2"
-                onClick={handleUpdate}
-              >
+                onClick={handleUpdate}>
                 Save Changes
               </button>
               <button
                 type="button"
                 className="btn btn-secondary"
-                onClick={() => setEditingMedical(null)}
-              >
+                onClick={() => setEditingMedical(null)}>
                 Cancel
               </button>
             </div>
@@ -246,5 +218,4 @@ function TableMedicaldata({ data, setData }) {
     </div>
   );
 }
-
 export default TableMedicaldata;

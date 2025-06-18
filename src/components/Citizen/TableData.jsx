@@ -39,7 +39,7 @@ function TableData({ data, setData }) {
     if (confirmDelete.isConfirmed) {
       try {
         const res = await fetch(
-          `https://medical-website-three-delta.vercel.app/citizens/delete-citizen/${national_ID}`,
+          `https://mcsei-production.up.railway.app/citizens/delete-citizen/${national_ID}`,
           {
             method: "DELETE",
             headers: {
@@ -94,7 +94,7 @@ function TableData({ data, setData }) {
     if (confirmUpdate.isConfirmed) {
       try {
         const res = await fetch(
-          `https://medical-website-three-delta.vercel.app/citizens/update-citizen/${editingCitizen.national_ID}`,
+          `https://mcsei-production.up.railway.app/citizens/update-citizen/${editingCitizen.national_ID}`,
           {
             method: "PATCH",
             headers: {
@@ -154,15 +154,13 @@ function TableData({ data, setData }) {
                       <button
                         className="btn btn-warning btn-sm me-2"
                         onClick={() => handleEditClick(citizen)}
-                        disabled={!TOKEN}
-                      >
+                        disabled={!TOKEN}>
                         Update
                       </button>
                       <button
                         className="btn btn-danger btn-sm"
                         onClick={() => handleDelete(citizen.national_ID)}
-                        disabled={!TOKEN}
-                      >
+                        disabled={!TOKEN}>
                         Delete
                       </button>
                     </td>
@@ -175,7 +173,6 @@ function TableData({ data, setData }) {
       ) : (
         <p className="text-center">No data available</p>
       )}
-
       {editingCitizen && updatedData && (
         <div className="container mt-4">
           <h3 className="text-center">Update Citizen Data</h3>
@@ -207,5 +204,4 @@ function TableData({ data, setData }) {
     </div>
   );
 }
-
 export default TableData;

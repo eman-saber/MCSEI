@@ -25,7 +25,7 @@ function RadiologyData() {
       const token = localStorage.getItem("userToken");
 
       const response = await fetch(
-        `https://medical-website-three-delta.vercel.app/radiology/${searchId}`,
+        `https://mcsei-production.up.railway.app/radiology/${searchId}`,
         {
           method: "GET",
           headers: {

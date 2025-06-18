@@ -48,7 +48,7 @@ const CreateRadiology = () => {
 
     try {
       const response = await fetch(
-        "https://medical-website-three-delta.vercel.app/radiology/create-radiology",
+        "https://mcsei-production.up.railway.app/radiology/create-radiology",
         {
           method: "POST",
           headers: {
@@ -83,12 +83,10 @@ const CreateRadiology = () => {
       });
     }
   };
-
   return (
     <div className="container mt-5">
       <RadiologyForm onSubmit={handleFormSubmit} />
     </div>
   );
 };
-
 export default CreateRadiology;

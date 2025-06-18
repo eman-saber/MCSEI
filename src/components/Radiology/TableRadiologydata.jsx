@@ -12,7 +12,6 @@ function TableRadiologydata({ data, setData }) {
   const [currentImageIndex, setCurrentImageIndex] = useState(null);
   const [viewedRecordId, setViewedRecordId] = useState(null);
   const TOKEN = localStorage.getItem("userToken");
-
   const getFileExtension = (url) => {
     const parts = url.split(".");
     if (parts.length > 1) {
@@ -20,18 +19,14 @@ function TableRadiologydata({ data, setData }) {
     }
     return "";
   };
-
   const loadDicomImage = (imageUrl, recordId, index) => {
     const element = document.getElementById("dicomImage");
     if (!element) return Swal.fire("Error", "Viewer not found", "error");
-
     const urlLower = imageUrl.toLowerCase();
     const isDicom = urlLower.includes(".dcm");
-
     try {
       setCurrentImageIndex(index);
       setViewedRecordId(recordId);
-
       if (isDicom) {
         cornerstone.enable(element);
         cornerstone
@@ -68,21 +63,17 @@ function TableRadiologydata({ data, setData }) {
       console.error(err);
     }
   };
-
   const navigateImage = (direction) => {
     const currentRecord = data.find((r) => r._id === viewedRecordId);
     if (!currentRecord || !currentRecord.images || currentImageIndex == null) return;
-
     let newIndex = currentImageIndex;
     if (direction === "next") newIndex++;
     else if (direction === "prev") newIndex--;
-
     if (newIndex >= 1 && newIndex <= currentRecord.images.length) {
       const nextImage = currentRecord.images[newIndex - 1];
       loadDicomImage(nextImage.secure_url, currentRecord._id, newIndex);
     }
   };
-
   useEffect(() => {
     const handleKeyDown = (e) => {
       if (e.key === "ArrowRight") navigateImage("next");
@@ -91,7 +82,6 @@ function TableRadiologydata({ data, setData }) {
     window.addEventListener("keydown", handleKeyDown);
     return () => window.removeEventListener("keydown", handleKeyDown);
   });
-
   const downloadImage = async (url, filename) => {
     try {
       const response = await fetch(url);
@@ -108,7 +98,6 @@ function TableRadiologydata({ data, setData }) {
       Swal.fire("Error", "Failed to download the image", "error");
     }
   };
-
   const handleDelete = async (national_ID, _id) => {
     if (!TOKEN) return Swal.fire("Unauthorized", "Login required", "error");
 
@@ -119,11 +108,10 @@ function TableRadiologydata({ data, setData }) {
       showCancelButton: true,
       confirmButtonText: "Yes, delete it!",
     });
-
     if (confirm.isConfirmed) {
       try {
         const res = await fetch(
-          `https://medical-website-three-delta.vercel.app/radiology/delete-radiology/${national_ID}/${_id}`,
+          `https://mcsei-production.up.railway.app/radiology/delete-radiology/${national_ID}/${_id}`,
           {
             method: "DELETE",
             headers: { Authorization: `Bearer ${TOKEN}` },
@@ -137,16 +125,13 @@ function TableRadiologydata({ data, setData }) {
       }
     }
   };
-
   const handleEditClick = (record) => {
     setEditingRecord(record);
     setUpdatedData({ ...record, images: [] });
   };
-
   const handleUpdate = async () => {
     if (!TOKEN || !editingRecord)
       return Swal.fire("Unauthorized", "Login required", "error");
-
     const confirm = await Swal.fire({
       title: "Confirm Update",
       text: "Do you want to save changes?",
@@ -154,47 +139,31 @@ function TableRadiologydata({ data, setData }) {
       showCancelButton: true,
       confirmButtonText: "Yes, update it!",
     });
-
     if (confirm.isConfirmed) {
       try {
-        const {
-          _id,
-          createdAt,
-          updatedAt,
-          __v,
-          radiology_date,
-          images,
-          ...validData
-        } = updatedData;
-
+        const {_id, createdAt, updatedAt, __v, radiology_date, images, ...validData } = updatedData;
         if (!validData.radiology_type) {
           return Swal.fire("Missing Data", "Please fill required fields.", "error");
         }
-
         const formData = new FormData();
         formData.append("radiology_type", validData.radiology_type);
         formData.append("radiologistNotes", validData.radiologistNotes || "");
-
         if (Array.isArray(images) && images[0] instanceof File) {
           formData.append("images", images[0]);
         }
-
         const res = await fetch(
-          `https://medical-website-three-delta.vercel.app/radiology/update-radiology/${editingRecord.national_ID}/${editingRecord._id}`,
+          `https://mcsei-production.up.railway.app/radiology/update-radiology/${editingRecord.national_ID}/${editingRecord._id}`,
           {
             method: "PATCH",
             headers: { Authorization: `Bearer ${TOKEN}` },
             body: formData,
           }
         );
-
         if (!res.ok) throw new Error(await res.text());
-
         const newImage =
           images?.[0] instanceof File
             ? [{ secure_url: URL.createObjectURL(images[0]) }]
             : editingRecord.images;
-
         setData((prevData) =>
           prevData.map((record) =>
             record._id === editingRecord._id
@@ -209,7 +178,6 @@ function TableRadiologydata({ data, setData }) {
       }
     }
   };
-
   return (
     <div className="container mt-4">
       {data?.length > 0 ? (
@@ -256,25 +224,13 @@ function TableRadiologydata({ data, setData }) {
                                 >
                                   View {image.secure_url.toLowerCase().includes(".dcm") ? "DICOM" : "Image"}
                                 </button>
-                                <a
-                                  href={image.secure_url}
-                                  className="btn btn-outline-secondary btn-sm d-block mb-1"
-                                  target="_blank"
-                                  rel="noopener noreferrer"
-                                >
-                                  Open
-                                </a>
-                                <button
-                                  className="btn btn-outline-success btn-sm d-block"
-                                  onClick={() =>
+                                <a href={image.secure_url} className="btn btn-outline-secondary btn-sm d-block mb-1" target="_blank" rel="noopener noreferrer" > Open</a>
+                                <button className="btn btn-outline-success btn-sm d-block" onClick={() =>
                                     downloadImage(
                                       image.secure_url,
                                       `${row.national_ID}_image_${idx + 1}${getFileExtension(image.secure_url)}`
                                     )
-                                  }
-                                >
-                                  Download
-                                </button>
+                                  }> Download </button>
                               </div>
                             );
                           })}
@@ -284,18 +240,10 @@ function TableRadiologydata({ data, setData }) {
                       )}
                     </td>
                     <td>
-                      <button
-                        className="btn btn-warning btn-sm me-2"
-                        onClick={() => handleEditClick(row)}
-                      >
-                        Update
-                      </button>
+                      <button className="btn btn-warning btn-sm me-2" onClick={() => handleEditClick(row)}>  Update </button>
                       <button
                         className="btn btn-danger btn-sm"
-                        onClick={() => handleDelete(row.national_ID, row._id)}
-                      >
-                        Delete
-                      </button>
+                        onClick={() => handleDelete(row.national_ID, row._id)}> Delete </button>
                     </td>
                   </tr>
                 ))}
@@ -306,7 +254,6 @@ function TableRadiologydata({ data, setData }) {
       ) : (
         <p className="text-center">No radiology data available</p>
       )}
-
       {editingRecord && (
         <div className="container mt-4">
           <h3 className="text-center">Update Radiology Record</h3>
@@ -317,31 +264,21 @@ function TableRadiologydata({ data, setData }) {
             </div>
             <div className="mb-3">
               <label>Radiology Type</label>
-              <input
-                className="form-control"
-                value={updatedData.radiology_type || ""}
-                onChange={(e) =>
+              <input className="form-control" value={updatedData.radiology_type || ""}onChange={(e) =>
                   setUpdatedData({ ...updatedData, radiology_type: e.target.value })
                 }
               />
             </div>
             <div className="mb-3">
               <label>Radiologist Notes</label>
-              <input
-                className="form-control"
-                value={updatedData.radiologistNotes || ""}
-                onChange={(e) =>
+              <input className="form-control" value={updatedData.radiologistNotes || ""} onChange={(e) =>
                   setUpdatedData({ ...updatedData, radiologistNotes: e.target.value })
                 }
               />
             </div>
             <div className="mb-3">
               <label>Upload New Image</label>
-              <input
-                type="file"
-                className="form-control"
-                accept=".dcm,image/*"
-                onChange={(e) => {
+              <input type="file" className="form-control" accept=".dcm,image/*" onChange={(e) => {
                   const file = e.target.files[0];
                   setUpdatedData((prev) => ({
                     ...prev,
@@ -351,23 +288,14 @@ function TableRadiologydata({ data, setData }) {
               />
             </div>
             <div className="d-flex justify-content-center gap-3 mt-4">
-              <button type="button" className="btn btn-success" onClick={handleUpdate}>
-                Save Changes
-              </button>
-              <button type="button" className="btn btn-secondary" onClick={() => setEditingRecord(null)}>
-                Cancel
-              </button>
+              <button type="button" className="btn btn-success" onClick={handleUpdate}> Save Changes </button>
+              <button type="button" className="btn btn-secondary" onClick={() => setEditingRecord(null)}> Cancel</button>
             </div>
           </form>
         </div>
       )}
-
-      <div
-        id="dicomImage"
-        style={{ width: "100%", height: "500px", textAlign: "center", marginTop: "20px" }}
-      ></div>
+      <div id="dicomImage" style={{ width: "100%", height: "500px", textAlign: "center", marginTop: "20px" }}></div>
     </div>
   );
 }
-
 export default TableRadiologydata;

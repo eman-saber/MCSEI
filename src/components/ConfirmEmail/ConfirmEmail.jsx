@@ -19,7 +19,7 @@ const ConfirmEmail = () => {
     };
 
     try {
-      const response = await fetch("https://medical-website-three-delta.vercel.app/auth/confirm-email", {
+      const response = await fetch("https://mcsei-production.up.railway.app/auth/confirm-email", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(payload),

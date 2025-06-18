@@ -13,7 +13,7 @@ function AdminDashboard() {
       const TOKEN = localStorage.getItem("userToken");
 
       const response = await axios.patch(
-        "https://medical-website-three-delta.vercel.app/user/dashboard/role",
+        "https://mcsei-production.up.railway.app/user/dashboard/role",
         { email, role },
         {
           headers: {

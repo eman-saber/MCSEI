@@ -11,7 +11,7 @@ function ForgetPassword() {
     e.preventDefault();
     try {
       const response = await axios.patch(
-        "https://medical-website-three-delta.vercel.app/auth/forget-password",
+        "https://mcsei-production.up.railway.app/auth/forget-password",
         { email }
       );
       console.log(response.data);

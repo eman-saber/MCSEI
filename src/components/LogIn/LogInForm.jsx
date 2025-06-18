@@ -13,7 +13,7 @@ function LogInForm() {
   const handleLogIn = async (e) => {
     e.preventDefault();
     try {
-      const response = await fetch("https://medical-website-three-delta.vercel.app/auth/login", {
+      const response = await fetch("https://mcsei-production.up.railway.app/auth/login", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ email, password }),

@@ -11,13 +11,10 @@ function CreateCitizen() {
     const [blood, setBlood] = useState("");
     const [birthdate, setBirthdate] = useState("");
     const [mobileNumber, setMobileNumber] = useState("");
-
     const formSubmit = (e) => {
         e.preventDefault();
-
         const TOKEN = localStorage.getItem("userToken");
         console.log("TOKEN USED:", TOKEN); 
-
         if (!TOKEN) {
             Swal.fire({
                 title: "Unauthorized",
@@ -27,8 +24,7 @@ function CreateCitizen() {
             });
             return;
         }
-
-        fetch("https://medical-website-three-delta.vercel.app/citizens/create-citizen", {
+        fetch("https://mcsei-production.up.railway.app/citizens/create-citizen", {
             method: "POST",
             headers: {
                 "Content-Type": "application/json",
@@ -85,7 +81,6 @@ function CreateCitizen() {
             });
         });
     };
-
     return (
         <div className="out-form">
             <div className="container p-4 bg-light rounded shadow-lg" style={{ border: "1px solid blue", borderRadius: "10px" }}>

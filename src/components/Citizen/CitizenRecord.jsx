@@ -19,14 +19,12 @@ function CitizenRecord() {
 
     try {
       const TOKEN = localStorage.getItem("userToken");
-      // console.log("TOKEN:", TOKEN);
-
       if (!searchId) {
         setError("Please enter a valid National ID.");
         return;
       }
       const response = await fetch(
-        `https://medical-website-three-delta.vercel.app/citizens/search?national_ID=${searchId}`, 
+        `https://mcsei-production.up.railway.app/citizens/search?national_ID=${searchId}`, 
         {
           method: "GET",
           headers: {
@@ -36,11 +34,9 @@ function CitizenRecord() {
         }
       );
       if (!response.ok) {
-        // console.log(response);
         throw new Error(response?.message);
       }
       const result = await response.json();
-      // console.log("Fetched Data:", result);
       const citizen = result.citizen; 
       if (!citizen || typeof citizen !== "object") {
         throw new Error("Invalid data format: citizen is not an object");
@@ -85,5 +81,4 @@ function CitizenRecord() {
     </div>
   );
 }
-
 export default CitizenRecord;

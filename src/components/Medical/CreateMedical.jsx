@@ -24,7 +24,7 @@ function CreateMedical() {
       return;
     }
 
-    fetch("https://medical-website-three-delta.vercel.app/medical-record/create-medical-record", {
+    fetch("https://mcsei-production.up.railway.app/medical-record/create-medical-record", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -73,7 +73,6 @@ function CreateMedical() {
     <div className="out-form">
       <div className="container p-4 bg-light rounded shadow-lg" style={{ border: "1px solid blue", borderRadius: "10px" }}>
         <h2 className="text-center fw-bold text-primary"> Add Medical Information</h2>
-
         <form className="row g-3" onSubmit={formSubmit}>
           {/* National ID */}
           <div className="col-md-6">
@@ -88,7 +87,6 @@ function CreateMedical() {
               onChange={(e) => setNationalId(e.target.value)} 
             />
           </div>
-
           {/* Diagnosis */}
           <div className="">
             <label htmlFor="Diagnosis" className="form-label fw-bold">Diagnosis:</label>
@@ -102,7 +100,6 @@ function CreateMedical() {
               onChange={(e) => setDiagnosis(e.target.value)} 
             />
           </div>
-
           {/* Treatment */}
           <div className="">
             <label htmlFor="Treatment" className="form-label fw-bold">Treatment:</label>
@@ -116,7 +113,6 @@ function CreateMedical() {
               onChange={(e) => setTreatment(e.target.value)} 
             />
           </div>
-
           {/* Clinic Name */}
           <div className="">
             <label htmlFor="ClinicName" className="form-label fw-bold">Clinic Name:</label>
@@ -130,7 +126,6 @@ function CreateMedical() {
               onChange={(e) => setClinicName(e.target.value)} 
             />
           </div>
-
           {/* Clinic Code */}
           <div className="">
             <label htmlFor="ClinicCode" className="form-label fw-bold">Clinic Code:</label>
@@ -144,7 +139,6 @@ function CreateMedical() {
               onChange={(e) => setClinicCode(e.target.value)} 
             />
           </div>
-
           {/* Buttons */}
           <div className="d-flex justify-content-end gap-3 mt-4">
             <button type="submit" className="btn btn-primary shadow-sm px-4">Add</button>
@@ -155,5 +149,4 @@ function CreateMedical() {
     </div>
   );   
 }
-
 export default CreateMedical;

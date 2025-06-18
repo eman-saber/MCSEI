@@ -9,7 +9,7 @@ function SignUpForm() {
     const navigate = useNavigate();
     const handleSignUp = async (values) => {
         try {
-            const response = await fetch("https://medical-website-three-delta.vercel.app/auth/signup", {
+            const response = await fetch("https://mcsei-production.up.railway.app/auth/signup", {
                 method: "POST",
                 headers: {
                     "Content-Type": "application/json",
@@ -85,12 +85,9 @@ function SignUpForm() {
                 }
                 return errors;
             }}
-            onSubmit={handleSignUp}
-        >
+            onSubmit={handleSignUp}>
             {({ values, handleChange, handleBlur, errors, touched }) => (
                 <FormikForm>
-                  
-
                     <Form.Group className="mb-3">
                         <Form.Label>
                             <FontAwesomeIcon icon={faUser} className="me-2 text-primary" />
@@ -100,13 +97,11 @@ function SignUpForm() {
                             type="text"
                             name="userName"
                             placeholder="Enter your full name"
-                            className={`form-control ${errors.userName && touched.userName ? "is-invalid" : ""}`}
-                        />
+                            className={`form-control ${errors.userName && touched.userName ? "is-invalid" : ""}`}/>
                         {errors.userName && touched.userName && (
                             <div className="invalid-feedback">{errors.userName}</div>
                         )}
                     </Form.Group>
-
                     <Form.Group className="mb-3">
                         <Form.Label>
                             <FontAwesomeIcon icon={faEnvelope} className="me-2 text-primary" />
@@ -116,13 +111,11 @@ function SignUpForm() {
                             type="email"
                             name="email"
                             placeholder="Enter your email"
-                            className={`form-control ${errors.email && touched.email ? "is-invalid" : ""}`}
-                        />
+                            className={`form-control ${errors.email && touched.email ? "is-invalid" : ""}`}/>
                         {errors.email && touched.email && (
                             <div className="invalid-feedback">{errors.email}</div>
                         )}
                     </Form.Group>
-
                     <Form.Group className="mb-3">
                         <Form.Label>
                             <FontAwesomeIcon icon={faLock} className="me-2 text-primary" />
@@ -132,13 +125,11 @@ function SignUpForm() {
                             type="password"
                             name="password"
                             placeholder="Enter a password"
-                            className={`form-control ${errors.password && touched.password ? "is-invalid" : ""}`}
-                        />
+                            className={`form-control ${errors.password && touched.password ? "is-invalid" : ""}`}/>
                         {errors.password && touched.password && (
                             <div className="invalid-feedback">{errors.password}</div>
                         )}
                     </Form.Group>
-
                     <Form.Group className="mb-3">
                         <Form.Label>
                             <FontAwesomeIcon icon={faLock} className="me-2 text-primary" />
@@ -148,13 +139,11 @@ function SignUpForm() {
                             type="password"
                             name="confirmationPassword"
                             placeholder="Re-enter your password"
-                            className={`form-control ${errors.confirmationPassword && touched.confirmationPassword ? "is-invalid" : ""}`}
-                        />
+                            className={`form-control ${errors.confirmationPassword && touched.confirmationPassword ? "is-invalid" : ""}`}/>
                         {errors.confirmationPassword && touched.confirmationPassword && (
                             <div className="invalid-feedback">{errors.confirmationPassword}</div>
                         )}
                     </Form.Group>
-
                     <Button type="submit" className="w-100">Sign Up</Button>
                 </FormikForm>
             )}
