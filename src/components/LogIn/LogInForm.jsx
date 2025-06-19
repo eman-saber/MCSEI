@@ -12,6 +12,7 @@ function LogInForm() {
 
   const handleLogIn = async (e) => {
     e.preventDefault();
+    setError("");
     try {
       const response = await fetch("https://mcsei-production.up.railway.app/auth/login", {
         method: "POST",
@@ -27,10 +28,15 @@ function LogInForm() {
         localStorage.setItem("userToken", TOKEN);
         navigate("/dashboard");
       } else {
-        setError(responseData.message || "Incorrect email or password. Please try again.");
+        const message = responseData.message?.toLowerCase();
+        if (message?.includes("invalid account")) {
+          setError("Invalid email or password. Please try again.");
+        } else {
+          setError(responseData.message || "Login failed. Please try again.");
+        }
       }
     } catch (err) {
-      setError("An error occurred. Please try again.");
+      setError("Network error. Please try again later.");
     }
   };
 
@@ -76,4 +82,5 @@ function LogInForm() {
     </Form>
   );
 }
+
 export default LogInForm;

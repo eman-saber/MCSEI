@@ -11,7 +11,7 @@ function VerifyCode() {
     const handleSubmit = async (e) => {
         e.preventDefault();
         try {
-            const response = await axios.patch('https://mcsei-production.up.railway.app/valid-forget-password', {
+            const response = await axios.patch('https://mcsei-production.up.railway.app/auth/valid-forget-password', {
                 email,
                 code,
             });

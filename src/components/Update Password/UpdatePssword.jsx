@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import axios from "axios";
-import Swal from "sweetalert2"; 
+import Swal from "sweetalert2";
 
 function UpdatePassword() {
   const [oldPassword, setOldPassword] = useState("");
@@ -9,6 +9,16 @@ function UpdatePassword() {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+
+    if (password !== confirmationPassword) {
+      Swal.fire({
+        icon: "warning",
+        title: "Password Mismatch",
+        text: "New password and confirmation do not match.",
+      });
+      return;
+    }
+
     try {
       const token = localStorage.getItem("userToken");
       const response = await axios.patch(
@@ -30,20 +40,28 @@ function UpdatePassword() {
         title: "Password updated successfully!",
         text: "You will now be redirected to login.",
       }).then(() => {
-        
-        window.location.href = "/login"; 
+        window.location.href = "/login";
       });
     } catch (error) {
       console.error(error);
-      alert("Error updating password. Check console.");
+     
+      Swal.fire({
+        icon: "error",
+        title: "Password update failed",
+        text:
+          error.response?.data?.message ||
+          "An unexpected error occurred. Please try again.",
+      });
     }
   };
+
   return (
     <div className="out-form">
       <div className="container my-5 d-flex justify-content-center ">
         <div
           className="card shadow p-4"
-          style={{ maxWidth: "500px", width: "100%" }}>
+          style={{ maxWidth: "500px", width: "100%" }}
+        >
           <h2 className="mb-4 text-center">Update Password</h2>
           <form onSubmit={handleSubmit}>
             <div className="mb-3">
@@ -53,7 +71,8 @@ function UpdatePassword() {
                 className="form-control"
                 value={oldPassword}
                 onChange={(e) => setOldPassword(e.target.value)}
-                required/>
+                required
+              />
             </div>
             <div className="mb-3">
               <label className="form-label">New Password</label>
@@ -62,7 +81,8 @@ function UpdatePassword() {
                 className="form-control"
                 value={password}
                 onChange={(e) => setPassword(e.target.value)}
-                required/>
+                required
+              />
             </div>
             <div className="mb-3">
               <label className="form-label">Confirm New Password</label>
@@ -71,13 +91,17 @@ function UpdatePassword() {
                 className="form-control"
                 value={confirmationPassword}
                 onChange={(e) => setConfirmationPassword(e.target.value)}
-                required/>
+                required
+              />
             </div>
-            <button type="submit" className="btn btn-primary w-100"> Update Password</button>
+            <button type="submit" className="btn btn-primary w-100">
+              Update Password
+            </button>
           </form>
         </div>
       </div>
     </div>
   );
 }
+
 export default UpdatePassword;
