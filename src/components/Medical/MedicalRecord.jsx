@@ -44,8 +44,12 @@ function MedicalRecord() {
       const result = await response.json();
       console.log("Fetched Data:", result);
 
-      if (!result.data || !result.data.medicalRecord) {
-        throw new Error("Invalid data format: medical data is missing.");
+      if (
+        !result.data ||
+        !Array.isArray(result.data.medicalRecord) ||
+        result.data.medicalRecord.length === 0
+      ) {
+        throw new Error("No medical data found for this National ID.");
       }
 
       setMedicalData(result.data.medicalRecord);

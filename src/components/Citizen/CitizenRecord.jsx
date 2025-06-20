@@ -12,6 +12,7 @@ function CitizenRecord() {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState("");
   const navigate = useNavigate(); 
+
   const handleSearch = async (searchId) => {
     setCitizenData([]);
     setError("");
@@ -23,6 +24,7 @@ function CitizenRecord() {
         setError("Please enter a valid National ID.");
         return;
       }
+
       const response = await fetch(
         `https://mcsei-production.up.railway.app/citizens/search?national_ID=${searchId}`, 
         {
@@ -33,14 +35,18 @@ function CitizenRecord() {
           }
         }
       );
+
       if (!response.ok) {
-        throw new Error(response?.message);
+        throw new Error("Citizen data not found.");
       }
+
       const result = await response.json();
       const citizen = result.citizen; 
-      if (!citizen || typeof citizen !== "object") {
-        throw new Error("Invalid data format: citizen is not an object");
+
+      if (!citizen || Object.keys(citizen).length === 0) {
+        throw new Error("No citizen found for this National ID.");
       }
+
       setCitizenData([citizen]);
       navigate(`/citizenrecord/${searchId}`);
 
@@ -81,4 +87,5 @@ function CitizenRecord() {
     </div>
   );
 }
+
 export default CitizenRecord;
